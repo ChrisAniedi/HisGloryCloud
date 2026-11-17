@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
   partialPrefetching: true,
   images: {
     // Sermon thumbnails from the church's YouTube channel.
-    remotePatterns: [new URL("https://i.ytimg.com/vi/**")],
+    remotePatterns: [{ protocol: "https", hostname: "i.ytimg.com", pathname: "/vi/**" }],
   },
   turbopack: {
     // Pin the workspace root so a parent folder's configs are never picked up.
