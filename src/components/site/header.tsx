@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
-import { motion, useMotionValueEvent, useScroll } from "motion/react";
+import { motion, useMotionValueEvent, useScroll, useSpring } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import { Logo } from "./logo";
 import { MenuOverlay } from "./menu-overlay";
@@ -20,7 +20,8 @@ const ease = [0.16, 1, 0.3, 1] as const;
  */
 export function Header() {
   const pathname = usePathname();
-  const { scrollY } = useScroll();
+  const { scrollY, scrollYProgress } = useScroll();
+  const progress = useSpring(scrollYProgress, { stiffness: 140, damping: 30 });
   const [moved, setMoved] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [overDark, setOverDark] = useState(false);
@@ -123,6 +124,8 @@ export function Header() {
             </button>
           </div>
         </div>
+        {/* how far down the page you are */}
+        <motion.span aria-hidden className="absolute inset-x-0 bottom-0 h-[2px] origin-left bg-red" style={{ scaleX: progress, opacity: menu ? 0 : 1 }} />
       </motion.header>
 
       <MenuOverlay open={menu} onOpenChange={setMenu} />

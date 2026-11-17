@@ -29,6 +29,7 @@
 
   --font-sans: var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-source-serif), ui-serif, Georgia, serif;
+  --font-display: var(--font-paytone), var(--font-inter-tight), ui-sans-serif, sans-serif;
 
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -120,7 +121,7 @@
     padding-inline: var(--gutter);
   }
   .section-y {
-    padding-block: clamp(5rem, 10vw, 9rem);
+    padding-block: clamp(4rem, 8vw, 7rem);
   }
   /* Small label above a heading: plain sentence case, the accent colour */
   .kicker {
@@ -129,19 +130,22 @@
     color: var(--color-red);
   }
   .heading-1 {
-    font-weight: 500;
-    font-size: clamp(2.5rem, 5.4vw, 4.5rem);
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(2.4rem, 5vw, 4.25rem);
     line-height: 1.02;
-    letter-spacing: -0.035em;
+    letter-spacing: -0.015em;
   }
   .heading-2 {
-    font-weight: 500;
-    font-size: clamp(2rem, 4vw, 3.25rem);
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(1.9rem, 3.5vw, 2.85rem);
     line-height: 1.05;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.012em;
   }
   .heading-3 {
-    font-weight: 500;
+    font-family: var(--font-display);
+    font-weight: 400;
     font-size: 1.5rem;
     line-height: 1.15;
     letter-spacing: -0.02em;

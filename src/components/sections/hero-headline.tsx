@@ -32,7 +32,7 @@ export function HeroHeadline({ dark }: { dark: boolean }) {
   const glowAt = start + (first.length + 2) * step + 0.5;
 
   return (
-    <h1 className={cn("mt-7 text-[clamp(2.9rem,min(6.2vw,9.6svh),5.75rem)] leading-[1] font-medium tracking-[-0.045em]", dark ? "text-white" : "text-ink")}>
+    <h1 className={cn("mt-7 font-display text-[clamp(2.6rem,min(5.6vw,8.8svh),5.25rem)] leading-[1.02] tracking-[-0.015em]", dark ? "text-white" : "text-ink")}>
       <span className="sr-only">Raising Kingdom builders for God’s glory.</span>
       <span aria-hidden className="block">
         <span className="flex flex-wrap justify-center gap-x-[0.24em]">

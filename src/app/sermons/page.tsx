@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
+import { Tilt } from "@/components/motion/tilt";
 import { Chip, SectionIntro } from "@/components/site/section-intro";
 import { SermonLibrary } from "@/components/blocks/sermon-library";
 import { WorshipWithUs } from "@/components/blocks/worship-with-us";
@@ -30,7 +31,7 @@ export default async function SermonsPage() {
         <div className="container-x">
           <Reveal className="text-center">
             <Chip>Sermons</Chip>
-            <h1 className="mx-auto mt-6 max-w-4xl text-[clamp(3rem,7vw,6.25rem)] leading-[0.95] font-medium tracking-[-0.05em]">
+            <h1 className="mx-auto mt-6 max-w-4xl text-[clamp(3rem,7vw,6.25rem)] leading-[0.95] font-display tracking-[-0.015em]">
               Grow through <span className="text-red">the Word.</span>
             </h1>
             <p className="mx-auto mt-6 max-w-xl text-lg text-muted md:text-xl">Be strengthened, equipped and transformed through the preaching of God’s Word, by {church.leader.name}.</p>
@@ -47,7 +48,7 @@ export default async function SermonsPage() {
           <div className="mt-12 grid gap-4 md:grid-cols-3">
             {platforms.map(({ Icon, ...p }, i) => (
               <Reveal key={p.label} delay={i * 0.08} y={30}>
-                <a href={p.href} target="_blank" rel="noreferrer" className={cn("group flex h-full min-h-[16rem] flex-col justify-between rounded-[26px] p-7 transition-transform duration-500 hover:-translate-y-1", p.tone)}>
+                <Tilt className="h-full rounded-[26px]"><a href={p.href} target="_blank" rel="noreferrer" className={cn("group flex h-full min-h-[16rem] flex-col justify-between rounded-[26px] p-7 transition-transform duration-500 hover:-translate-y-1", p.tone)}>
                   <div className="flex items-start justify-between">
                     <Icon className="size-9" />
                     <ArrowUpRight className="size-6 transition-transform duration-300 group-hover:rotate-45" />
@@ -57,7 +58,7 @@ export default async function SermonsPage() {
                     <p className="mt-1 text-sm opacity-70">{p.handle}</p>
                     <p className="mt-3 opacity-80">{p.note}</p>
                   </div>
-                </a>
+                </a></Tilt>
               </Reveal>
             ))}
           </div>

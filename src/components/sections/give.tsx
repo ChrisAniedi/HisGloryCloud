@@ -18,7 +18,7 @@ export function Give() {
               <LineArt strokes={art.hands} viewBox="0 0 240 160" width={1.6} color="#a8231c" accent="#a8231c" className="pointer-events-none absolute top-6 right-8 hidden h-36 w-56 opacity-70 lg:block" />
               <div className="relative lg:col-span-6">
                 <Chip>Give & outreach</Chip>
-                <h2 className="mt-5 text-[clamp(2.4rem,5vw,4rem)] leading-[0.98] font-medium tracking-[-0.045em]">Give towards the work.</h2>
+                <h2 className="mt-5 text-[clamp(2.4rem,5vw,4rem)] leading-[0.98] font-display tracking-[-0.015em]">Give towards the work.</h2>
                 <p className="mt-4 max-w-md text-lg text-night/70">Your generosity keeps the doors open and reaches past them: families in need, outreach, and missions where the gospel hasn’t reached yet.</p>
                 <blockquote className="mt-6 border-l-2 border-red pl-5">
                   <p className="font-serif text-lg italic">“{scriptures.giving.text}”</p>

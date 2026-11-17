@@ -24,7 +24,7 @@ export function NextStepsList() {
               <Link href={s.href} className="group relative flex items-center gap-6 overflow-hidden border-b border-line py-7 md:py-8">
                 <span aria-hidden className="absolute inset-0 -z-10 origin-left scale-x-0 bg-white transition-transform duration-500 ease-[var(--ease-out-soft)] group-hover:scale-x-100" />
                 <span className="flex-1 transition-transform duration-500 group-hover:translate-x-3">
-                  <span className="block text-[clamp(1.6rem,3vw,2.3rem)] leading-tight font-medium tracking-[-0.035em]">{s.title}</span>
+                  <span className="block text-[clamp(1.6rem,3vw,2.3rem)] leading-tight font-display tracking-[-0.01em]">{s.title}</span>
                   <span className="mt-1 block text-lg text-muted">{s.body}</span>
                 </span>
                 <span className="mr-3 grid size-12 shrink-0 place-items-center rounded-full ring-1 ring-line transition-colors duration-300 group-hover:bg-red group-hover:text-white group-hover:ring-red">

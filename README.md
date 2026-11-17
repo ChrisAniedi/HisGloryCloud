@@ -18,7 +18,7 @@ joincci.org, and Dribbble church/SaaS hero shots (framed hero card, big light di
   window edge on a warm off-white page (`paper`). Content cards are white with a hairline (`line`).
 - **Colour**: `night` (warm near-black) and `cream` carry the hero and footer; `red`, the heart in the HGC
   logo, is the accent and the vision band. Tokens are in `src/app/globals.css`.
-- **Type**: Inter Tight. Display sizes are light (300) with tight tracking and a two-tone line (white +
+- **Type**: titles in Paytone One (owner's pick, from bhmglobal.org; `font-display`, `.heading-1/2/3`), text in Inter Tight. Display sizes are light (300) with tight tracking and a two-tone line (white +
   `cream-muted`). Source Serif italic is used only for scripture and the quote mark.
 - **Hero** (`components/sections/hero-view.tsx`): light and open, full width (owner liked a Dribbble SaaS hero
   with orbit rings; made our own). Rings spread from the tagline like ripples (`hero-orbits.tsx`) with congregation
@@ -36,13 +36,15 @@ joincci.org, and Dribbble church/SaaS hero shots (framed hero card, big light di
   red "Next step" side panel (`site/next-step-panel.tsx`) and "Menu" (full screen, adds Help & support).
 - **WhatsApp button** (`site/whatsapp-float.tsx`): bottom right on every page, for prayer, counselling and help.
   Needs the church's WhatsApp number in `contact.whatsapp` (src/lib/site.ts); until then it opens /pastoral-care.
-- **Home sections**, in order: Hero; Worship with us (in person / livestream, `blocks/worship-with-us.tsx`, idea from
-  bhmglobal.org); Interlude (Psalm 95:6); Start here (About / Grow / Community photo cards); Our mission (words
-  light up on scroll); Fuel your faith (sermon row from YouTube, `blocks/sermon-rail.tsx`); Ministries (line art);
-  Vision (photo band); Take the next step; Your first Sunday; Give; FAQ (`blocks/faq.tsx`); Come worship with us
-  (closing band with a fan of photos, `blocks/closing-band.tsx`). Footer ends with the church's name fading out.
-- **Pages**: /about (hero with a dome of the places HGC plans to reach), /grow, /sermons (searchable grid of the
-  channel's messages, `blocks/sermon-library.tsx`), /give (giving as worship, account card, FAQ), /community (photos
+- **Home sections**, in order: Hero; Worship with us (Psalm 95:6 beside In person and Livestream cards, YouTube +
+  Facebook, live-aware); Find your place (About / Plan a visit / Watch online cards that move sideways as you scroll,
+  pinned on large screens, after camuh.com.ng's product cards); Our mission (compact, words light up); Fuel your faith
+  (sermon row); Ministries; Vision (compact split card); Take the next step; Your first Sunday; Give; FAQ. The footer
+  opens with "Come worship with us" and a fan of photos (`site/footer-invite.tsx`) and ends with the church's name fading.
+- **Effects**: Lenis smooth scroll; reveals; cards that tilt towards the pointer with a soft light (`motion/tilt.tsx`);
+  a reading-progress line under the header; scroll-driven card rows, parallax photos, a turning globe on /about.
+- **Pages**: /about (hero with a dome of the places HGC plans to reach), /grow (led by Ministry Training: facts, courses, registration,
+  FAQ), /sermons (search + BHM-style topic chips; each topic also opens the same search on YouTube), /give (giving as worship, account card, FAQ), /community (photos
   on a string, values, units, socials, FAQ), /help (prayer, counselling, contact, FAQ), plus the earlier pages.
   Several pages close with a large verse (`blocks/verse-block.tsx`). Sections share `SectionIntro` / `Chip`.
 - **Latest messages** come from the YouTube channel feed (`src/lib/youtube.ts`, cached for hours, shorts

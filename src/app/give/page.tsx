@@ -23,7 +23,7 @@ export default function GivePage() {
         <div className="container-x text-center">
           <Reveal>
             <Chip>Give & outreach</Chip>
-            <h1 className="mx-auto mt-6 max-w-4xl text-[clamp(3rem,7vw,6.25rem)] leading-[0.95] font-medium tracking-[-0.05em]">
+            <h1 className="mx-auto mt-6 max-w-4xl text-[clamp(3rem,7vw,6.25rem)] leading-[0.95] font-display tracking-[-0.015em]">
               Giving as <span className="text-red">worship.</span>
             </h1>
             <p className="mx-auto mt-6 max-w-xl text-lg text-muted md:text-xl">Your generosity is an act of worship to God, and a powerful way to take the love of Christ beyond the four walls of the church.</p>

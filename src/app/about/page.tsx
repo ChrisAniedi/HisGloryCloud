@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { BookOpen, Globe2, HandHeart, Radio, Users } from "lucide-react";
 import { AboutHero } from "@/components/blocks/about-hero";
-import { ClosingBand } from "@/components/blocks/closing-band";
 import { SectionIntro, Chip } from "@/components/site/section-intro";
 import { Reveal } from "@/components/motion/reveal";
 import { LogoMark } from "@/components/site/logo";
@@ -123,7 +122,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-      <ClosingBand />
     </>
   );
 }

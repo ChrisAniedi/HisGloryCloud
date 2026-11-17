@@ -11,11 +11,11 @@ export async function Messages() {
   const items = await getLatestMessages(8);
   if (!items.length) return null;
   return (
-    <section className="section-y overflow-hidden">
+    <section className="overflow-hidden pt-[clamp(1rem,3vw,2rem)] pb-[clamp(3rem,6vw,5rem)]">
       <div className="container-x flex flex-col justify-between gap-6 md:flex-row md:items-end">
         <Reveal className="max-w-2xl">
           <Chip>Sermons</Chip>
-          <h2 className="mt-5 text-[clamp(2.6rem,5.6vw,4.75rem)] leading-[0.98] font-medium tracking-[-0.045em]">Fuel your faith.</h2>
+          <h2 className="mt-5 heading-1">Fuel your faith.</h2>
           <p className="mt-4 text-lg text-muted">Every message is preached to deepen your faith and draw you closer to Jesus. Watch the latest, or catch up on what you missed.</p>
         </Reveal>
         <Reveal delay={0.1}>

@@ -4,6 +4,7 @@ import { ArrowUpRight, HandHeart, HeartHandshake, MapPin, MessageCircle } from "
 import { PageHero } from "@/components/site/page-hero";
 import { SectionIntro } from "@/components/site/section-intro";
 import { Reveal } from "@/components/motion/reveal";
+import { Tilt } from "@/components/motion/tilt";
 import { Faq } from "@/components/blocks/faq";
 import { SocialLinks, WhatsAppIcon } from "@/components/site/social-icons";
 import { church, gatherings, generalFaqs, mapsUrl, pastoralOccasions, stock, waLink } from "@/lib/site";
@@ -38,7 +39,7 @@ export default function HelpPage() {
           <div className="mt-12 grid gap-4 md:grid-cols-3">
             {ways.map(({ Icon, ...w }, i) => (
               <Reveal key={w.title} delay={i * 0.08} y={30}>
-                <Link href={w.href} {...("external" in w && w.external ? { target: "_blank", rel: "noreferrer" } : {})} className={`group flex h-full min-h-[19rem] flex-col justify-between rounded-[26px] p-7 transition-transform duration-500 hover:-translate-y-1 ${w.tone}`}>
+                <Tilt className="h-full rounded-[26px]"><Link href={w.href} {...("external" in w && w.external ? { target: "_blank", rel: "noreferrer" } : {})} className={`group flex h-full min-h-[19rem] flex-col justify-between rounded-[26px] p-7 transition-transform duration-500 hover:-translate-y-1 ${w.tone}`}>
                   <Icon className="size-8" />
                   <div>
                     <h2 className="text-[1.7rem] leading-tight font-medium tracking-[-0.03em]">{w.title}</h2>
@@ -47,7 +48,7 @@ export default function HelpPage() {
                       {w.cta} <ArrowUpRight className="size-4 transition-transform group-hover:rotate-45" />
                     </span>
                   </div>
-                </Link>
+                </Link></Tilt>
               </Reveal>
             ))}
           </div>

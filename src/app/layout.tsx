@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { MotionProvider } from "@/components/motion/motion-provider";
+import { SmoothScroll } from "@/components/motion/smooth-scroll";
 import { Header } from "@/components/site/header";
 import { Footer } from "@/components/site/footer";
 import { WhatsAppFloat } from "@/components/site/whatsapp-float";
@@ -17,6 +18,12 @@ const sans = localFont({
   src: [
     { path: "./fonts/inter-tight-latin-wght-normal.woff2", style: "normal" },
   ],
+});
+const display = localFont({
+  variable: "--font-paytone",
+  display: "swap",
+  weight: "400",
+  src: [{ path: "./fonts/paytone-one-latin-400-normal.woff2", style: "normal" }],
 });
 const serif = localFont({
   variable: "--font-source-serif",
@@ -84,7 +91,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${sans.variable} ${serif.variable}`}>
+    <html lang="en" className={`${sans.variable} ${serif.variable} ${display.variable}`}>
       <body className="min-h-dvh overflow-x-clip">
         <a
           href="#main"
@@ -93,6 +100,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           Skip to content
         </a>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        <SmoothScroll />
         <MotionProvider>
           <Header />
           <main id="main">{children}</main>

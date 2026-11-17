@@ -2,62 +2,119 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRef } from "react";
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { useEffect, useRef, useState } from "react";
+import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
 import { Chip } from "@/components/site/section-intro";
+import { cn } from "@/lib/utils";
 
-export type WelcomeCard = { label: string; title: string; href: string; image: string; position?: string; external?: boolean };
+export type WelcomeCard = {
+  label: string;
+  title: string;
+  body: string;
+  badge: string;
+  info: string;
+  cta: string;
+  href: string;
+  image: string;
+  position?: string;
+  external?: boolean;
+};
 
-function Card({ c, i }: { c: WelcomeCard; i: number }) {
-  const ref = useRef<HTMLAnchorElement>(null);
-  const reduce = useReducedMotion();
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const scale = useTransform(scrollYProgress, [0, 0.5], reduce ? [1, 1] : [1.18, 1]);
-  const y = useTransform(scrollYProgress, [0, 1], reduce ? ["0%", "0%"] : ["-6%", "6%"]);
+function Card({ c, i, n, progress }: { c: WelcomeCard; i: number; n: number; progress?: MotionValue<number> }) {
+  const zero = useScroll().scrollYProgress;
+  const p = progress ?? zero;
+  // each card's photo settles as the row passes it
+  const scale = useTransform(p, [Math.max(0, (i - 1) / n), (i + 1) / n], progress ? [1.18, 1] : [1, 1]);
   return (
-    <Reveal delay={i * 0.1} y={40}>
-      <Link
-        ref={ref}
-        href={c.href}
-        {...(c.external ? { target: "_blank", rel: "noreferrer" } : {})}
-        className="group relative block aspect-[4/5] overflow-hidden rounded-[26px] bg-night text-white"
-      >
-        <motion.div className="absolute inset-0" style={{ scale, y }}>
-          <Image src={c.image} alt="" fill sizes="(min-width:1024px) 33vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" style={{ objectPosition: c.position }} />
-        </motion.div>
-        <span className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/5 to-black/60" />
-        <span className="absolute top-6 left-6">
-          <span className="block text-xs font-semibold tracking-[0.14em] text-white/75 uppercase">{c.label}</span>
-          <span className="mt-1 block text-[1.9rem] leading-tight font-medium tracking-[-0.03em]">{c.title}</span>
+    <Link
+      href={c.href}
+      {...(c.external ? { target: "_blank", rel: "noreferrer" } : {})}
+      className="group relative flex h-[min(34rem,68svh)] w-[min(86vw,36rem)] shrink-0 flex-col justify-between overflow-hidden rounded-[28px] bg-night p-6 text-white md:p-7 lg:w-[38vw]"
+    >
+      <motion.div className="absolute inset-0 -z-0" style={{ scale }}>
+        <Image src={c.image} alt="" fill sizes="(min-width:1024px) 40vw, 86vw" className="object-cover transition-transform duration-[1.2s] ease-[var(--ease-out-soft)] group-hover:scale-[1.06]" style={{ objectPosition: c.position }} />
+      </motion.div>
+      <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(20,16,13,0.82)_0%,rgba(20,16,13,0.25)_40%,rgba(20,16,13,0.15)_60%,rgba(20,16,13,0.75)_100%)]" />
+
+      <div className="relative flex items-start justify-between gap-4">
+        <div className="max-w-sm">
+          <span className="text-xs font-semibold tracking-[0.14em] text-white/70 uppercase">{c.label}</span>
+          <h3 className="mt-1 font-display text-[clamp(1.9rem,3vw,2.6rem)] leading-none">{c.title}</h3>
+          <p className="mt-3 text-white/75">{c.body}</p>
+        </div>
+        <span className="shrink-0 rounded-full bg-white/15 px-3 py-1 text-xs font-semibold ring-1 ring-white/20 backdrop-blur-md">{c.badge}</span>
+      </div>
+
+      <div className="relative">
+        <span className="flex items-center gap-3 rounded-full bg-white/90 p-1.5 pl-5 text-sm text-ink shadow-lg backdrop-blur transition-transform duration-500 group-hover:-translate-y-1">
+          <span className="min-w-0 flex-1 truncate">{c.info}</span>
+          <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-night px-4 py-2 font-semibold text-white transition-colors group-hover:bg-red">
+            {c.cta} <ArrowUpRight className="size-4 transition-transform group-hover:rotate-45" />
+          </span>
         </span>
-        <span className="absolute right-6 bottom-6 grid size-12 place-items-center rounded-full bg-white/15 ring-1 ring-white/25 backdrop-blur-md transition-[background-color,color,transform] duration-500 group-hover:rotate-45 group-hover:bg-white group-hover:text-night">
-          <ArrowUpRight className="size-5" />
-        </span>
-      </Link>
-    </Reveal>
+      </div>
+    </Link>
   );
 }
 
-/** "Start here": three ways in, as tall photo cards that settle into place as you scroll. */
-export function Welcome({ cards, chip = "Start here", title = "Find your place.", body = "Get to know the family, grow in the Word, and find people to walk with. Your journey of faith can begin, or begin again, right here." }: { cards: WelcomeCard[]; chip?: string; title?: string; body?: string }) {
+/**
+ * "Find your place": three ways in, on a row that moves sideways as you scroll down (pinned on
+ * large screens), each card's photo settling as it passes. A swipeable row on small screens.
+ */
+export function Welcome({ cards }: { cards: WelcomeCard[] }) {
+  const ref = useRef<HTMLElement>(null);
+  const track = useRef<HTMLDivElement>(null);
+  const reduce = useReducedMotion();
+  const [wide, setWide] = useState(false);
+  const [travel, setTravel] = useState(0);
+
+  useEffect(() => {
+    const measure = () => {
+      const lg = window.matchMedia("(min-width: 1024px)").matches;
+      setWide(lg);
+      const t = track.current;
+      if (t) setTravel(Math.max(0, t.scrollWidth - t.clientWidth));
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
+
+  const pinned = wide && !reduce && travel > 0;
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
+  const x = useTransform(scrollYProgress, [0.08, 0.92], [0, -travel]);
+  const bar = useTransform(scrollYProgress, [0.08, 0.92], ["0%", "100%"]);
+
   return (
-    <section className="pb-[clamp(5rem,10vw,9rem)]">
-      <div className="container-x">
-        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+    <section ref={ref} className="relative" style={pinned ? { height: `calc(100svh + ${travel * 1.25}px)` } : undefined}>
+      <div className={cn("flex flex-col justify-center overflow-hidden py-[clamp(4rem,8vw,6rem)]", pinned && "sticky top-0 h-svh py-0")}>
+        <div className="container-x flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <Reveal>
-            <Chip>{chip}</Chip>
-            <h2 className="mt-5 text-[clamp(3rem,7vw,5.5rem)] leading-[0.95] font-medium tracking-[-0.05em]">{title}</h2>
+            <Chip>Start here</Chip>
+            <h2 className="heading-1 mt-5">Find your place.</h2>
           </Reveal>
-          <Reveal delay={0.1} className="max-w-sm">
-            <p className="text-lg text-muted">{body}</p>
+          <Reveal delay={0.1} className="max-w-md">
+            <p className="text-lg text-muted">Get to know the family, join us on Sunday, or worship with us online. Your journey of faith can begin, or begin again, right here.</p>
           </Reveal>
         </div>
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+
+        <motion.div
+          ref={track}
+          className={cn("mt-10 flex gap-4", pinned ? "" : "snap-x snap-mandatory overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [&>*]:snap-start")}
+          style={{ paddingInline: "var(--gutter)", scrollPaddingInline: "var(--gutter)", x: pinned ? x : 0 }}
+        >
           {cards.map((c, i) => (
-            <Card key={c.href} c={c} i={i} />
+            <Card key={c.href} c={c} i={i} n={cards.length} progress={pinned ? scrollYProgress : undefined} />
           ))}
+        </motion.div>
+
+        <div className="container-x mt-8 flex items-center gap-4 text-sm text-muted">
+          <span className="relative h-[2px] flex-1 overflow-hidden rounded-full bg-line">
+            <motion.span className="absolute inset-y-0 left-0 rounded-full bg-red" style={{ width: pinned ? bar : "100%" }} />
+          </span>
+          <span>{pinned ? "Keep scrolling to browse" : "Swipe to browse"}</span>
         </div>
       </div>
     </section>

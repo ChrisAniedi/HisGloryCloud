@@ -37,7 +37,7 @@ export function NewsletterForm({ className, stacked = false }: { className?: str
           aria-invalid={state.status === "error" || undefined}
           aria-describedby="nl-msg"
           className={cn(
-            "h-12 min-w-0 flex-1 rounded-full border bg-white/5 px-5 text-white outline-none placeholder:text-white/45 focus:border-white/60",
+            "h-12 min-h-12 w-full min-w-0 shrink-0 rounded-full sm:w-auto sm:flex-1 border bg-white/5 px-5 text-white outline-none placeholder:text-white/45 focus:border-white/60",
             state.status === "error" ? "border-red-on-ink" : "border-white/15"
           )}
         />

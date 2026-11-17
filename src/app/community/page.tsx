@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowUpRight, BookOpen, HandHeart, Megaphone } from "lucide-react";
 import { Chip, SectionIntro } from "@/components/site/section-intro";
 import { Reveal } from "@/components/motion/reveal";
+import { Tilt } from "@/components/motion/tilt";
 import { PeggedPhotos } from "@/components/blocks/pegged-photos";
 import { Faq } from "@/components/blocks/faq";
 import { VerseBlock } from "@/components/blocks/verse-block";
@@ -42,7 +43,7 @@ export default function CommunityPage() {
         <div className="container-x text-center">
           <Reveal>
             <Chip>Community</Chip>
-            <h1 className="mx-auto mt-6 max-w-4xl text-[clamp(3rem,7vw,6.25rem)] leading-[0.95] font-medium tracking-[-0.05em]">
+            <h1 className="mx-auto mt-6 max-w-4xl text-[clamp(3rem,7vw,6.25rem)] leading-[0.95] font-display tracking-[-0.015em]">
               Find your <span className="text-red">family.</span>
             </h1>
             <p className="mx-auto mt-6 max-w-xl text-lg text-muted md:text-xl">A community where you can grow spiritually, build real friendships, and walk with others who are passionate about Jesus.</p>
@@ -102,7 +103,7 @@ export default function CommunityPage() {
           <div className="mt-12 grid gap-4 md:grid-cols-3">
             {channels.map(({ Icon, ...c }, i) => (
               <Reveal key={c.label} delay={i * 0.08} y={30}>
-                <a href={c.href} target="_blank" rel="noreferrer" className={`group flex h-full min-h-[15rem] flex-col justify-between rounded-[26px] p-7 transition-transform duration-500 hover:-translate-y-1 ${c.tone}`}>
+                <Tilt className="h-full rounded-[26px]"><a href={c.href} target="_blank" rel="noreferrer" className={`group flex h-full min-h-[15rem] flex-col justify-between rounded-[26px] p-7 transition-transform duration-500 hover:-translate-y-1 ${c.tone}`}>
                   <div className="flex items-start justify-between">
                     <Icon className="size-9" />
                     <ArrowUpRight className="size-6 transition-transform duration-300 group-hover:rotate-45" />
@@ -112,7 +113,7 @@ export default function CommunityPage() {
                     <p className="text-[1.6rem] font-medium tracking-[-0.03em]">{c.handle}</p>
                     <p className="mt-2 opacity-80">{c.note}</p>
                   </div>
-                </a>
+                </a></Tilt>
               </Reveal>
             ))}
           </div>

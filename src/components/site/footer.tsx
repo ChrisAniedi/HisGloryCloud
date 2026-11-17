@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { FooterInvite } from "./footer-invite";
 import { ArrowUpRight } from "lucide-react";
 import { Logo, LogoMark } from "./logo";
 import { SocialLinks } from "./social-icons";
@@ -47,8 +48,9 @@ export function Footer() {
     <footer data-nav="dark" className="p-2 md:p-3">
       <div className="relative isolate overflow-hidden rounded-[24px] bg-night text-white md:rounded-[28px]">
         <LogoMark onDark className="pointer-events-none absolute -bottom-24 -left-16 -z-10 h-[30rem] opacity-[0.05] md:h-[40rem]" />
-        <div className="container-x pt-16 md:pt-24">
-          <div className="grid gap-12 lg:grid-cols-12">
+        <FooterInvite />
+        <div className="container-x pt-14 md:pt-16">
+          <div className="grid gap-12 border-t border-white/10 pt-14 lg:grid-cols-12">
             <div className="lg:col-span-4">
               <Logo onDark />
               <p className="mt-6 max-w-sm text-white/60">Raising Kingdom builders for God’s glory. A family of joyful believers in Egbeda, Lagos, since {church.founded.slice(0, 4)}.</p>
