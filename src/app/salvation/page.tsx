@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { FormPage, AsideList, AsideScripture } from "@/components/site/form-page";
 import { SalvationForm } from "@/components/forms/forms";
+import { media } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Salvation — Welcome to new life",
@@ -11,6 +12,7 @@ export default function Page() {
   return (
     <FormPage
       kicker="Salvation"
+        image={media.thanksgiving ? { src: media.thanksgiving, alt: "A worshipper singing during a thanksgiving service", position: "50% 25%" } : null}
       title="Welcome to a new life in Christ"
       intro="Congratulations. This is the best decision you will ever make. Heaven is rejoicing, and so are we. You don’t have to walk this road alone."
       formTitle="Tell us about you"

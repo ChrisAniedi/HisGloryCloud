@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { FormPage, AsideList, AsideScripture } from "@/components/site/form-page";
 import { TestimonyForm } from "@/components/forms/forms";
+import { media } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Share your testimony",
@@ -11,6 +12,7 @@ export default function Page() {
   return (
     <FormPage
       kicker="Share a testimony"
+        image={media.worship ? { src: media.worship, alt: "Members of the church with hands raised in worship", position: "50% 25%" } : null}
       title="Tell of His goodness"
       intro="Are you grateful? Your story could be the very thing that builds someone else’s faith. Share what God has done."
       formTitle="Share your testimony"

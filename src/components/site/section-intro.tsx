@@ -6,7 +6,7 @@ export function Chip({ children, onDark = false, className }: { children: React.
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-2 rounded-full py-1 pr-3.5 pl-2 text-sm font-medium",
+        "inline-flex w-fit items-center gap-2 rounded-full py-1 pr-3.5 pl-2 text-sm font-medium",
         onDark ? "bg-white/[0.07] text-white/80 ring-1 ring-white/15" : "bg-white text-ink-soft shadow-[0_6px_18px_-12px_rgba(35,29,23,0.4)] ring-1 ring-line",
         className
       )}

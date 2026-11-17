@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { Chip } from "@/components/site/section-intro";
 import { YouTubeIcon, InstagramIcon, FacebookIcon } from "@/components/site/social-icons";
 import { media, socials } from "@/lib/site";
 
@@ -14,8 +15,8 @@ export function Watch() {
     <section className="section-y">
       <div className="container-x grid gap-12 lg:grid-cols-12 lg:items-start lg:gap-16">
         <div className="lg:col-span-6">
-          <p className="kicker">Every Sunday from 9am (WAT)</p>
-          <h2 className="heading-2 mt-2">Join the service live on YouTube</h2>
+          <Chip>Every Sunday from 9am (WAT)</Chip>
+          <h2 className="heading-2 mt-5">Join the service live on YouTube</h2>
           <p className="mt-4 text-lg text-muted">
             Can’t be in Egbeda this week? Worship with us and hear the Word wherever you are. Past messages are on the
             channel too.

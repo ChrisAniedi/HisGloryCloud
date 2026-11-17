@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { FormPage } from "@/components/site/form-page";
 import { PastoralForm } from "@/components/forms/forms";
-import { pastoralOccasions } from "@/lib/site";
+import { pastoralOccasions, stock } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Pastoral services",
@@ -12,6 +12,7 @@ export default function Page() {
   return (
     <FormPage
       kicker="Pastoral services"
+        image={stock.babyDedication}
       title="Care for every season of life"
       intro="Our pastoral services offer guidance and care for every member of the church family, rooted in compassion and the Word of God."
       formTitle="Book a pastoral service"

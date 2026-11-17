@@ -1,4 +1,5 @@
 import { Hero } from "@/components/sections/hero";
+import { Interlude } from "@/components/sections/interlude";
 import { Welcome, type WelcomeCard } from "@/components/sections/welcome";
 import { Mission } from "@/components/sections/mission";
 import { Ways } from "@/components/sections/ways";
@@ -6,6 +7,7 @@ import { Messages } from "@/components/sections/messages";
 import { Ministries } from "@/components/sections/ministries";
 import { Vision } from "@/components/sections/vision";
 import { NextStepsList } from "@/components/sections/next-steps-list";
+import { FirstSunday } from "@/components/sections/first-sunday";
 import { Gatherings } from "@/components/sections/gatherings";
 import { Give } from "@/components/sections/give";
 import { media } from "@/lib/site";
@@ -20,6 +22,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <Interlude />
       <Welcome cards={welcome} />
       <Mission />
       <Ways />
@@ -27,6 +30,7 @@ export default function HomePage() {
       <Ministries />
       <Vision />
       <NextStepsList />
+      <FirstSunday />
       <Gatherings />
       <Give />
     </>

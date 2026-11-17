@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { FormPage, AsideList, AsideScripture } from "@/components/site/form-page";
 import { PrayerForm } from "@/components/forms/forms";
+import { media } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Prayer request",
@@ -11,6 +12,7 @@ export default function Page() {
   return (
     <FormPage
       kicker="Prayer request"
+        image={media.prayer ? { src: media.prayer, alt: "Members of the congregation in prayer", position: "55% 35%" } : null}
       title="You don’t have to pray alone"
       intro="Whatever you’re carrying, bring it here. Our prayer squad will take your request before the Lord and stand in agreement with you."
       formTitle="Send a prayer request"

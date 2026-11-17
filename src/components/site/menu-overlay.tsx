@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { Dialog } from "radix-ui";
 import { AnimatePresence, motion } from "motion/react";
-import { ArrowUpRight, MapPin } from "lucide-react";
+import { ArrowUpRight, MapPin, X } from "lucide-react";
 import { Logo } from "./logo";
 import { SocialLinks } from "./social-icons";
 import { church, gatherings, mapsUrl } from "@/lib/site";
@@ -50,10 +50,12 @@ export function MenuOverlay({ open, onOpenChange }: { open: boolean; onOpenChang
                 transition={{ duration: 0.7, ease }}
               >
                 <Dialog.Title className="sr-only">Menu</Dialog.Title>
-                <div className="container-x flex min-h-full flex-col pt-[14px] pb-10">
+                <div className="container-x flex min-h-full flex-col pt-[18px] pb-10">
                   <div className="flex h-16 items-center justify-between">
                     <Logo onDark />
-                    <span aria-hidden className="h-11 w-28" />
+                    <Dialog.Close className="inline-flex min-h-11 items-center gap-2.5 rounded-full bg-white/10 pr-4 pl-5 font-semibold ring-1 ring-white/20 ring-inset transition-colors hover:bg-white/20">
+                      Close <X className="size-5" />
+                    </Dialog.Close>
                   </div>
 
                   <div className="mt-10 grid flex-1 gap-12 lg:grid-cols-12">

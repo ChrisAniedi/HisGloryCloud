@@ -43,7 +43,7 @@ function Card({ c, i }: { c: WelcomeCard; i: number }) {
 /** "Welcome home": three ways in, as tall photo cards that settle into place as you scroll. */
 export function Welcome({ cards }: { cards: WelcomeCard[] }) {
   return (
-    <section className="section-y">
+    <section className="pb-[clamp(4.5rem,10vw,8.5rem)]">
       <div className="container-x">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <Reveal>

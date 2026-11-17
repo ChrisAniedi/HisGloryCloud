@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/site/page-hero";
 import { BankDetails } from "@/components/site/bank-details";
-import { giving, scriptures } from "@/lib/site";
+import { giving, scriptures, stock } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Give & outreach",
@@ -13,6 +13,7 @@ export default function GivePage() {
     <>
       <PageHero
         kicker="Give & outreach"
+        image={stock.choir}
         title="Giving that reaches beyond our walls"
         intro="We are committed to reaching people in need, spreading the gospel and serving our community. Your giving is how that work gets done."
       />

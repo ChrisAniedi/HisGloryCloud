@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { FormPage, AsideScripture } from "@/components/site/form-page";
 import { ServeForm } from "@/components/forms/forms";
-import { departments } from "@/lib/site";
+import { departments, stock } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Join the workforce",
@@ -12,6 +12,7 @@ export default function Page() {
   return (
     <FormPage
       kicker="Join the workforce"
+        image={stock.drummers}
       title="We love Christ by serving people"
       intro="Become part of the church workforce and help fulfil God’s mission in His tent and sanctuary, as a valued member of Christ’s team."
       formTitle="Find your place"

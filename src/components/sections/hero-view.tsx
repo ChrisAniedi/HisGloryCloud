@@ -39,7 +39,7 @@ export function HeroView({ latest, theme = "light" }: { latest: { title: string;
       <HeroOrbits theme={theme} />
       {dark && <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[60%] bg-[radial-gradient(40%_60%_at_50%_0%,rgba(240,106,91,0.14),transparent)]" />}
 
-      <div className="container-x relative flex min-h-[max(100svh,760px)] flex-col items-center pt-28 text-center md:pt-32">
+      <div className="container-x relative flex min-h-[max(100svh,760px)] flex-col items-center pt-32 text-center md:pt-40">
         <Rise delay={0.15}>
           <p
             className={cn(

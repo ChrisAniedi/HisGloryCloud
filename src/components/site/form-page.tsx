@@ -1,4 +1,5 @@
 import { PageHero } from "./page-hero";
+import type { Photo } from "@/lib/site";
 
 /** Layout for every "next step": what to expect on the left, the form on the right. */
 export function FormPage({
@@ -9,6 +10,7 @@ export function FormPage({
   aside,
   formTitle,
   formIntro,
+  image,
   children,
 }: {
   kicker: string;
@@ -18,11 +20,12 @@ export function FormPage({
   aside: React.ReactNode;
   formTitle: string;
   formIntro?: string;
+  image?: Photo | null;
   children: React.ReactNode;
 }) {
   return (
     <>
-      <PageHero kicker={kicker} crumb={crumb} title={title} intro={intro} />
+      <PageHero kicker={kicker} crumb={crumb} title={title} intro={intro} image={image} />
       <section className="section-y">
         <div className="container-x grid gap-12 lg:grid-cols-12 lg:gap-16">
           <aside className="lg:col-span-5">

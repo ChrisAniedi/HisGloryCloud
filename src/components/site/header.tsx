@@ -55,35 +55,36 @@ export function Header() {
           menu
             ? "bg-transparent text-white"
             : dark
-              ? "bg-night/55 text-white shadow-[inset_0_-1px_0_rgba(255,255,255,0.1)] backdrop-blur-2xl backdrop-saturate-150"
-              : moved
-                ? "bg-white/70 text-ink shadow-[inset_0_-1px_0_rgba(221,210,192,0.8),0_12px_32px_-22px_rgba(35,29,23,0.35)] backdrop-blur-2xl backdrop-saturate-150"
-                : "bg-transparent text-ink shadow-[inset_0_-1px_0_rgba(221,210,192,0.6)]"
+              ? "border-b border-white/10 bg-night/60 text-white shadow-[0_12px_32px_-22px_rgba(0,0,0,0.6)] backdrop-blur-2xl backdrop-saturate-150"
+              : cn(
+                  "border-b border-line/70 bg-[rgba(250,247,242,0.78)] text-ink backdrop-blur-2xl backdrop-saturate-150",
+                  moved && "shadow-[0_14px_36px_-24px_rgba(35,29,23,0.4)]"
+                )
         )}
-        animate={{ y: hidden && !menu && !step ? -84 : 0 }}
+        animate={{ y: hidden && !menu && !step ? -96 : 0 }}
         transition={{ duration: 0.45, ease }}
       >
-        <div className="container-x grid h-[76px] grid-cols-[1fr_auto] items-center gap-6 lg:grid-cols-[1fr_auto_1fr]">
-          <motion.nav aria-label="Main" className="-ml-2.5 hidden items-center lg:flex" animate={{ opacity: menu ? 0 : 1 }} style={{ pointerEvents: menu ? "none" : "auto" }}>
+        <div className="container-x grid h-[84px] grid-cols-[1fr_auto] items-center gap-8 lg:grid-cols-[1fr_auto_1fr]">
+          <motion.nav aria-label="Main" className="-ml-3 hidden items-center gap-1 lg:flex" animate={{ opacity: menu ? 0 : 1 }} style={{ pointerEvents: menu ? "none" : "auto" }}>
             {primaryNav.map((l) => (
               <Link
                 key={l.href + l.label}
                 href={l.href}
                 aria-current={active(l.href) ? "page" : undefined}
                 className={cn(
-                  "relative flex h-[76px] items-center px-2.5 text-[0.93rem] font-medium transition-colors",
+                  "relative flex h-[84px] items-center px-3 text-[0.95rem] font-medium whitespace-nowrap transition-colors",
                   active(l.href) ? (dark ? "text-cream" : "text-red") : dark ? "text-white/85 hover:text-white" : "text-ink-soft hover:text-ink"
                 )}
               >
                 {l.label}
-                {active(l.href) && <span className="absolute inset-x-2.5 bottom-0 h-[3px] rounded-t-full bg-current" />}
+                {active(l.href) && <span className="absolute inset-x-3 bottom-0 h-[3px] rounded-t-full bg-current" />}
               </Link>
             ))}
           </motion.nav>
 
           <Logo onDark={dark || menu} className="lg:justify-self-center" />
 
-          <div className="flex items-center justify-self-end gap-2 sm:gap-3">
+          <div className="flex items-center justify-self-end gap-2.5 sm:gap-3">
             <button
               type="button"
               onClick={() => setStep(true)}

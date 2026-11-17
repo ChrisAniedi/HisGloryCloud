@@ -3,7 +3,7 @@ import { FormPage } from "@/components/site/form-page";
 import { TrainingForm } from "@/components/forms/forms";
 import { SectionHeading } from "@/components/site/section-heading";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { trainingFaqs } from "@/lib/site";
+import { trainingFaqs, stock } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Ministry training",
@@ -24,6 +24,7 @@ export default function Page() {
     <>
       <FormPage
         kicker="Ministry training"
+        image={stock.churchInterior}
         title="Equipped to build the Kingdom"
         intro="The Ministry Training Program gives believers spiritual knowledge, leadership skills and hands-on ministry experience, so they can serve well in God’s kingdom."
         formTitle="Register your interest"

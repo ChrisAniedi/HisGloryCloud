@@ -299,3 +299,20 @@ export const media = {
   // Not shown for now (owner, 2026-11-17). To bring it back: "/media/pastor.jpg" (file kept).
   pastor: null as string | null,
 };
+
+export type Photo = { src: string; alt: string; credit?: string; creditHref?: string; position?: string };
+
+/**
+ * Stand-in photos for the inner pages, until the church supplies its own. Freely licensed from
+ * Wikimedia Commons; the licences need the credit shown, which PageHero does under the picture.
+ * Replace `src` with a church photo and drop `credit` when real pictures arrive.
+ */
+const commons = (file: string) => `https://commons.wikimedia.org/wiki/File:${file.replace(/ /g, "_")}`;
+export const stock = {
+  babyDedication: { src: "/media/stock/baby-dedication.jpg", alt: "A woman holding a baby at a dedication service", credit: "Nancy Altraide · CC BY 4.0", creditHref: commons("Baby Dedication Ceremony.jpg"), position: "50% 30%" },
+  worshipService: { src: "/media/stock/worship-service.jpg", alt: "A congregation standing in worship during a church service", credit: "Kingdom of Light 1 · CC BY 2.0", creditHref: commons("Calvary Baptist Church - Shiashie worship service.jpg"), position: "50% 40%" },
+  churchInterior: { src: "/media/stock/church-interior.jpg", alt: "A church full of worshippers facing the altar", credit: "Kingdom of Light 1 · CC BY 2.0", creditHref: commons("Victory Baptist Church, Ayigya worship service.jpg"), position: "50% 50%" },
+  auditorium: { src: "/media/stock/worship-hall.jpg", alt: "A large worship auditorium full of people during a service", credit: "Graciousbounty · CC BY-SA 4.0", creditHref: commons("Service at East End City Church, Dawhenya.jpg"), position: "50% 50%" },
+  choir: { src: "/media/stock/choir.jpg", alt: "Choir members in robes singing", credit: "SofirJaja01 · CC BY-SA 4.0", creditHref: commons("The Choir members.jpg"), position: "50% 35%" },
+  drummers: { src: "/media/stock/drummers.jpg", alt: "Church musicians playing drums", credit: "Arch-Angel Raphael the Artist · CC BY-SA 4.0", creditHref: commons("Church Choir Band - Igbo Tribe - Nike - Enugu State - Nigeria - 01.jpg"), position: "50% 45%" },
+} satisfies Record<string, Photo>;

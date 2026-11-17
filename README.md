@@ -38,11 +38,12 @@ joincci.org, and Dribbble church/SaaS hero shots (framed hero card, big light di
   the page moves, dark over sections marked `data-nav="dark"`, tucks away while scrolling down.
 - **WhatsApp button** (`site/whatsapp-float.tsx`): bottom right on every page, for prayer, counselling and help.
   Needs the church's WhatsApp number in `contact.whatsapp` (src/lib/site.ts); until then it opens /pastoral-care.
-- **Home sections**, in order: Hero; Welcome home (three tall photo cards that settle in on scroll, idea from
+- **Home sections**, in order: Hero; Interlude (ornament, Psalm 95:6, service times: the pause after the hero);
+  Welcome home (three tall photo cards that settle in on scroll, idea from
   joincci.org); Our mission (dark band, the words light up as you scroll); Gather with us (bento with small pictures
   built from real details); Latest messages; Ministries (Training, Pastoral Services, Outreach, each with a line
   drawing that draws itself, `motion/line-art.tsx` + `lib/drawings.ts`); Vision (worship photo band with parallax);
-  Take the next step (big rows); Plan your visit (times + map); Give (red band, soft card, line-art hands).
+  Take the next step (big rows); Your first Sunday (three steps on a drawn line, reused on /visit); Plan your visit (times + map); Give (red band, soft card, line-art hands).
   Sections share `SectionIntro` / `Chip` (`site/section-intro.tsx`). Rings stay in the hero only.
 - **Latest messages** come from the YouTube channel feed (`src/lib/youtube.ts`, cached for hours, shorts
   skipped, ALL CAPS titles put in sentence case, fallback list if YouTube is unreachable).
@@ -63,6 +64,13 @@ stock photos.
 | Home page sections | `src/components/sections/` |
 | Shared site pieces (header, footer, page header, bank details) | `src/components/site/` |
 | shadcn/ui components | `src/components/ui/` |
+
+## Stand-in photos (inner pages)
+
+Until the church sends its own photos, the inner page headers use freely licensed photos from Wikimedia Commons
+(`stock` in `src/lib/site.ts`, files in `public/media/stock/`). Their licences (CC BY / CC BY-SA) require the
+credit, which `PageHero` shows under each picture. To replace one, put the church's photo in `public/media/`,
+point `src` at it and remove `credit` / `creditHref`.
 
 ## Photos and logo
 

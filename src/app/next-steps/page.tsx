@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/site/page-hero";
 import { NextSteps } from "@/components/sections/next-steps";
-import { CtaBand } from "@/components/site/cta-band";
+import { stock } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Next steps",
@@ -13,11 +13,11 @@ export default function NextStepsPage() {
     <>
       <PageHero
         kicker="Next steps"
+        image={stock.worshipService}
         title="Where are you with God today?"
         intro="Wherever you are, there’s a next step, and people ready to take it with you. Pick the one that sounds like you."
       />
       <NextSteps heading={false} />
-      <CtaBand />
     </>
   );
 }
