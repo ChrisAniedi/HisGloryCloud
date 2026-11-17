@@ -1,80 +1,62 @@
-import Link from "next/link";
-import { ArrowUpRight, Clock, MapPin, Navigation } from "lucide-react";
-import { SectionHeading } from "@/components/site/section-heading";
-import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
-import { SpotlightCard } from "@/components/motion/spotlight-card";
-import { Button } from "@/components/ui/button";
+import { ArrowUpRight, Navigation } from "lucide-react";
+import { Reveal } from "@/components/motion/reveal";
+import { SectionIntro } from "@/components/site/section-intro";
 import { church, gatherings, mapsEmbedUrl, mapsUrl } from "@/lib/site";
 
-export function Gatherings() {
+/** Service times and the map: the practical "when and where". */
+export function Gatherings({ heading = true }: { heading?: boolean }) {
   return (
-    <section className="dark-section section-y relative overflow-hidden bg-ink-900 text-bone-100">
-      <div aria-hidden className="pointer-events-none absolute top-0 right-[-10%] size-[40rem] rounded-full bg-glory-500/10 blur-[140px]" />
-      <div className="container-x relative">
-        <SectionHeading
-          eyebrow="Gather with us"
-          title={<>Come as you are. <em className="text-glory">There’s a place for you.</em></>}
-          body="Whether you’re new to church, visiting, or looking for a spiritual home — you are welcome here."
-        />
+    <section className="section-y">
+      <div className="container-x">
+        {heading && (
+          <SectionIntro chip="Plan your visit" title="Come and worship with us" body="New to church, visiting Lagos, or looking for a spiritual home? There’s a seat with your name on it." />
+        )}
 
-        <Stagger className="mt-16 grid gap-4 lg:grid-cols-2" gap={0.12}>
-          {gatherings.map((g) => {
-            const [time, meridiem] = g.timeLabel.split(" –")[0].split(" ");
-            return (
-              <StaggerItem key={g.id}>
-                <SpotlightCard className="flex h-full flex-col rounded-[1.75rem] border border-white/10 bg-ink-850 p-8 md:p-10">
-                  <div className="flex items-center justify-between">
-                    <p className="eyebrow text-glory-300">{g.dayLabel}</p>
-                    <span className="flex items-center gap-1.5 whitespace-nowrap rounded-full border border-white/10 px-3 py-1 text-xs text-bone-100/60">
-                      <Clock className="size-3" /> {g.timeLabel}
-                    </span>
-                  </div>
-                  <div className="mt-12 flex items-end gap-3">
-                    <span className="text-display text-[clamp(6rem,14vw,11rem)] leading-[0.75] text-bone-50">{time.replace(":00", "")}</span>
-                    <span className="mb-2 font-serif text-4xl text-glory-300 italic">{meridiem}</span>
-                  </div>
-                  <h3 className="mt-8 font-serif text-4xl">{g.name}</h3>
-                  <p className="mt-3 max-w-md leading-relaxed text-bone-100/60">{g.description}</p>
-                </SpotlightCard>
-              </StaggerItem>
-            );
-          })}
-        </Stagger>
+        <Reveal delay={0.1} className={heading ? "mt-10" : ""}>
+          <div className="grid overflow-hidden rounded-[24px] border border-line bg-white lg:grid-cols-12">
+            <div className="flex flex-col p-6 md:p-10 lg:col-span-5">
+              <ul className="divide-y divide-line">
+                {gatherings.map((g) => (
+                  <li key={g.id} className="py-6 first:pt-0">
+                    <p className="text-sm font-medium text-red">{g.dayLabel}</p>
+                    <div className="mt-1 flex flex-wrap items-baseline justify-between gap-x-4">
+                      <h3 className="text-2xl font-medium tracking-tight">{g.name}</h3>
+                      <p className="text-2xl font-light tracking-tight">{g.timeLabel}</p>
+                    </div>
+                    <p className="mt-2 text-muted">{g.description}</p>
+                  </li>
+                ))}
+              </ul>
 
-        <Reveal className="mt-4">
-          <div className="grid overflow-hidden rounded-[1.75rem] border border-white/10 bg-ink-850 lg:grid-cols-5">
-            <div className="flex flex-col p-8 md:p-10 lg:col-span-2">
-              <span className="grid size-12 place-items-center rounded-2xl bg-glory-400 text-ink-950">
-                <MapPin className="size-5" />
-              </span>
-              <p className="eyebrow mt-8 text-glory-300">The {church.alias}</p>
-              <address className="mt-3 font-serif text-3xl leading-tight not-italic md:text-4xl">
-                {church.address.line1},<br />
-                {church.address.line2},<br />
-                {church.address.city}.
+              <address className="mt-auto border-t border-line pt-6 text-lg not-italic">
+                <span className="font-medium">The {church.alias}</span>
+                <br />
+                <span className="text-muted">
+                  {church.address.line1}, {church.address.line2}, {church.address.city}
+                </span>
               </address>
-              <div className="mt-auto flex flex-wrap gap-3 pt-10">
-                <Button asChild variant="glory">
-                  <a href={mapsUrl} target="_blank" rel="noreferrer">
-                    <Navigation /> Get directions
+              <div className="mt-6 flex flex-wrap gap-3">
+                <a href={mapsUrl} target="_blank" rel="noreferrer" className="inline-flex h-12 items-center gap-2 rounded-full bg-night px-5 font-semibold text-white hover:bg-night-soft">
+                  <Navigation className="size-4" /> Get directions
+                </a>
+                {heading && (
+                  <a href="/visit" className="group inline-flex h-12 items-center gap-1.5 rounded-full border border-line px-5 font-semibold hover:border-ink/40">
+                    What to expect <ArrowUpRight className="size-4 transition-transform group-hover:rotate-45" />
                   </a>
-                </Button>
-                <Button asChild variant="glass">
-                  <Link href="/visit">
-                    What to expect <ArrowUpRight />
-                  </Link>
-                </Button>
+                )}
               </div>
             </div>
-            <div className="relative min-h-[22rem] lg:col-span-3">
-              <iframe
-                title={`Map to ${church.name}`}
-                src={mapsEmbedUrl}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="absolute inset-0 size-full [filter:grayscale(1)_invert(0.92)_contrast(0.9)_sepia(0.25)]"
-              />
-              <div aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-r from-ink-850 via-transparent to-transparent lg:via-transparent" />
+
+            <div className="relative min-h-[22rem] p-2 lg:col-span-7">
+              <div className="relative size-full min-h-[22rem] overflow-hidden rounded-[18px] bg-paper">
+                <iframe
+                  title={`Map showing ${church.name}, ${church.address.full}`}
+                  src={mapsEmbedUrl}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="absolute inset-0 size-full"
+                />
+              </div>
             </div>
           </div>
         </Reveal>

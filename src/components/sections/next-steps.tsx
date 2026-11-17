@@ -1,111 +1,86 @@
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, HandHeart, Flame, Sparkles, Users } from "lucide-react";
-import { SectionHeading } from "@/components/site/section-heading";
-import { SpotlightCard } from "@/components/motion/spotlight-card";
-import { Stagger, StaggerItem } from "@/components/motion/reveal";
-import { Atmosphere } from "@/components/motion/glory-cloud";
-import { nextSteps } from "@/lib/site";
+import { ArrowUpRight, BookOpen, HandHeart, MessageCircleHeart, Users } from "lucide-react";
+import { Reveal } from "@/components/motion/reveal";
+import { SectionIntro } from "@/components/site/section-intro";
+import { media } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
-const icons = { salvation: Sparkles, prayer: Flame, testimony: HandHeart, serve: Users } as const;
-const layout = {
-  salvation: "lg:col-span-6 lg:row-span-2 min-h-[26rem] lg:min-h-[36rem]",
-  prayer: "lg:col-span-6 min-h-[17rem]",
-  testimony: "lg:col-span-3 min-h-[17rem]",
-  serve: "lg:col-span-3 min-h-[17rem]",
+type Card = {
+  href: string;
+  kicker: string;
+  title: string;
+  body: string;
+  span: string;
+  image?: string | null;
+  imagePos?: string;
+  tone?: "red" | "night" | "cream" | "white";
+  Icon?: React.ComponentType<{ className?: string; strokeWidth?: number }>;
+};
+
+const cards: Card[] = [
+  { href: "/salvation", kicker: "New life", title: "I just gave my life to Jesus", body: "Welcome to the family. We’ll walk with you as you grow.", span: "lg:col-span-7", image: media.thanksgiving, imagePos: "object-[50%_30%]" },
+  { href: "/prayer", kicker: "Prayer", title: "I need someone to pray with me", body: "Our prayer squad will stand in agreement with you.", span: "lg:col-span-5", image: media.prayer, imagePos: "object-[55%_40%]" },
+  { href: "/testimony", kicker: "Testimony", title: "God did something for me", body: "Share it, and build someone else’s faith.", span: "lg:col-span-3", tone: "red", Icon: MessageCircleHeart },
+  { href: "/serve", kicker: "Workforce", title: "I want to serve", body: "Choir, media, ushering, protocol and more.", span: "lg:col-span-3", tone: "night", Icon: Users },
+  { href: "/training", kicker: "Training", title: "Equip me to lead", body: "Ministry training. Next session in 2026.", span: "lg:col-span-3", tone: "cream", Icon: BookOpen },
+  { href: "/pastoral-care", kicker: "Pastoral care", title: "Stand with my family", body: "Dedications, thanksgivings, counselling.", span: "lg:col-span-3", tone: "white", Icon: HandHeart },
+];
+
+const tones = {
+  red: "bg-red text-white",
+  night: "bg-night text-white",
+  cream: "bg-cream text-night",
+  white: "bg-white text-night border border-line",
 } as const;
 
-export function NextSteps() {
+/** "Take your next step": photo cards for the big moments, colour cards for the rest. */
+export function NextSteps({ heading = true }: { heading?: boolean }) {
   return (
-    <section className="theme-light section-y relative z-10 -mt-10 rounded-[2.5rem] md:-mt-14 md:rounded-[3.5rem]">
+    <section className="section-y">
       <div className="container-x">
-        <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
-          <SectionHeading
-            eyebrow="Next steps"
-            title={<>Take the next step. <em className="text-glory-600">We’re with you</em> every step of the way.</>}
-            className="max-w-4xl"
-          />
-          <p className="max-w-sm text-muted-foreground lg:pb-3">
-            Wherever you are on your journey with God, there’s a clear, simple way forward — and real people ready to walk it with you.
-          </p>
-        </div>
+        {heading && (
+          <SectionIntro chip="Next steps" title="Wherever you are with God, take the next step" body="A real person from our team reads every form and gets back to you." />
+        )}
 
-        <Stagger className="mt-16 grid gap-4 md:grid-cols-2 lg:grid-cols-12 lg:grid-rows-2" gap={0.1}>
-          {nextSteps.map((s, i) => {
-            const Icon = icons[s.slug];
-            const featured = s.slug === "salvation";
+        <div className={cn("grid grid-cols-2 gap-2.5 sm:gap-3 lg:grid-cols-12", heading && "mt-12")}>
+          {cards.map((c, i) => {
+            const photo = !!c.image;
             return (
-              <StaggerItem key={s.slug} className={cn(layout[s.slug], featured && "md:col-span-2 lg:col-span-6")}>
-                <Link href={s.href} className="group block h-full rounded-[1.75rem] focus-visible:outline-offset-4">
-                  {featured ? (
-                    <Atmosphere tone="glory" className="flex h-full flex-col rounded-[1.75rem] p-8 text-bone-50 md:p-10">
-                      <CardBody i={i} Icon={Icon} s={s} featured />
-                    </Atmosphere>
-                  ) : (
-                    <SpotlightCard
-                      color="rgba(214,156,69,0.18)"
-                      className="flex h-full flex-col rounded-[1.75rem] border border-border bg-card p-8 transition-[border-color,transform] duration-500 group-hover:-translate-y-1 group-hover:border-ink-900/25"
-                    >
-                      <CardBody i={i} Icon={Icon} s={s} />
-                    </SpotlightCard>
+              <Reveal key={c.href} delay={0.05 * i} className={cn(c.span, photo && "col-span-2")}>
+                <Link
+                  href={c.href}
+                  className={cn(
+                    "group relative flex h-full flex-col overflow-hidden rounded-[22px] p-5 md:p-7",
+                    photo ? "min-h-[22rem] justify-end text-white md:min-h-[26rem]" : cn("min-h-[15rem] justify-between md:min-h-[17rem]", tones[c.tone ?? "white"])
                   )}
+                >
+                  {photo && (
+                    <>
+                      <Image src={c.image!} alt="" fill sizes="(min-width:1024px) 55vw, 100vw" className={cn("-z-10 object-cover transition-transform duration-700 group-hover:scale-[1.04]", c.imagePos)} />
+                      <span className="absolute inset-0 -z-10 bg-gradient-to-t from-black/85 via-black/30 to-black/5" />
+                    </>
+                  )}
+                  {!photo && c.Icon && <c.Icon className="size-7" strokeWidth={1.5} />}
+                  <div>
+                    <p className={cn("text-sm font-medium", photo ? "text-white/70" : "opacity-70")}>{c.kicker}</p>
+                    <h3 className={cn("mt-1.5 font-medium tracking-[-0.03em]", photo ? "text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.05]" : "text-[1.2rem] leading-[1.1] md:text-[1.5rem]")}>{c.title}</h3>
+                    <p className={cn("mt-2", photo ? "max-w-md text-white/75" : "text-[0.95rem] opacity-75 md:text-base")}>{c.body}</p>
+                    <span
+                      className={cn(
+                        "mt-5 inline-flex h-10 items-center gap-1.5 rounded-full px-4 text-sm font-semibold transition-colors",
+                        photo ? "bg-white text-night" : c.tone === "white" || c.tone === "cream" ? "bg-night text-white" : "bg-white/15 group-hover:bg-white/25"
+                      )}
+                    >
+                      Start here <ArrowUpRight className="size-4 transition-transform group-hover:rotate-45" />
+                    </span>
+                  </div>
                 </Link>
-              </StaggerItem>
+              </Reveal>
             );
           })}
-        </Stagger>
+        </div>
       </div>
     </section>
-  );
-}
-
-function CardBody({
-  s,
-  i,
-  Icon,
-  featured,
-}: {
-  s: (typeof nextSteps)[number];
-  i: number;
-  Icon: React.ComponentType<{ className?: string }>;
-  featured?: boolean;
-}) {
-  return (
-    <>
-      <div className="flex items-start justify-between">
-        <span
-          className={cn(
-            "grid size-12 place-items-center rounded-2xl",
-            featured ? "bg-white/10 text-glory-200 backdrop-blur-md" : "bg-ink-900 text-glory-300"
-          )}
-        >
-          <Icon className="size-5" />
-        </span>
-        <span className={cn("font-mono text-xs", featured ? "text-bone-100/50" : "text-muted-foreground")}>0{i + 1} / 04</span>
-      </div>
-      <div className="mt-auto pt-10">
-        <p className={cn("eyebrow", featured ? "text-glory-200" : "text-glory-600")}>{s.eyebrow}</p>
-        <h3 className={cn("mt-3 font-serif leading-[1.02] text-balance", featured ? "text-5xl md:text-6xl" : "text-3xl md:text-[2.1rem]")}>
-          {s.title}
-        </h3>
-        <p className={cn("mt-4 max-w-md text-[15px] leading-relaxed", featured ? "text-bone-100/75" : "text-muted-foreground")}>{s.blurb}</p>
-        <span
-          className={cn(
-            "mt-7 inline-flex items-center gap-3 text-sm font-medium",
-            featured ? "text-bone-50" : "text-foreground"
-          )}
-        >
-          {s.cta}
-          <span
-            className={cn(
-              "grid size-10 place-items-center rounded-full transition-all duration-500 ease-[var(--ease-glory)] group-hover:rotate-45",
-              featured ? "bg-glory-400 text-ink-950" : "bg-ink-900 text-bone-50 group-hover:bg-glory-500"
-            )}
-          >
-            <ArrowUpRight className="size-4" />
-          </span>
-        </span>
-      </div>
-    </>
   );
 }

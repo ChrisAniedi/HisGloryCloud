@@ -2,7 +2,7 @@
 
 import { createContext, useActionState, useContext, useId, useRef, startTransition, useEffect } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { ArrowRight, Check, Loader2 } from "lucide-react";
+import { Check, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { submitForm } from "@/app/actions";
 import { initialFormState, type FormKind, type FormState } from "@/lib/forms/schemas";
@@ -60,20 +60,16 @@ export function SiteForm({
       {state.status === "success" ? (
         <motion.div
           key="ok"
-          initial={{ opacity: 0, scale: 0.96, filter: "blur(8px)" }}
-          animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
           className={cn("relative flex flex-col items-center px-4 py-14 text-center", className)}
           role="status"
         >
-          <div className="relative mb-8 grid size-20 place-items-center">
-            <span className="absolute inset-0 animate-ping rounded-full bg-glory-400/30 [animation-duration:2.4s]" />
-            <span className="absolute inset-0 rounded-full bg-glory-400/20 blur-xl" />
-            <span className="relative grid size-20 place-items-center rounded-full bg-glory-400 text-ink-950">
-              <Check className="size-9" strokeWidth={2.5} />
-            </span>
-          </div>
-          <h3 className="font-serif text-4xl">{successTitle}</h3>
+          <span className="mb-6 grid size-14 place-items-center rounded-full bg-red-soft text-red">
+            <Check className="size-7" strokeWidth={2.5} />
+          </span>
+          <h3 className="heading-3 !text-3xl">{successTitle}</h3>
           <p className="mt-3 max-w-md text-muted-foreground">{state.message}</p>
           {successAction && <div className="mt-8">{successAction}</div>}
         </motion.div>
@@ -81,7 +77,7 @@ export function SiteForm({
         <motion.form
           key="form"
           ref={formRef}
-          exit={{ opacity: 0, y: -12, filter: "blur(6px)" }}
+          exit={{ opacity: 0 }}
           noValidate
           onSubmit={(e) => {
             e.preventDefault();
@@ -103,8 +99,7 @@ export function SiteForm({
               <Button type="submit" size="lg" disabled={pending} className="w-full sm:w-auto">
                 {pending ? <Loader2 className="animate-spin" /> : null}
                 {pending ? "Sending…" : submitLabel}
-                {!pending && <ArrowRight className="transition-transform group-hover/button:translate-x-0.5" />}
-              </Button>
+                              </Button>
             </div>
           </ErrorsCtx.Provider>
         </motion.form>
@@ -139,12 +134,12 @@ function FieldShell({
     as === "fieldset" ? (
       <legend className="mb-3 text-sm font-medium">
         {label}
-        {required && <span className="ml-0.5 text-glory-500">*</span>}
+        {required && <span className="ml-0.5 text-red">*</span>}
       </legend>
     ) : (
       <Label htmlFor={id} className="mb-2.5">
         {label}
-        {required && <span className="-ml-1.5 text-glory-500">*</span>}
+        {required && <span className="-ml-1.5 text-red">*</span>}
       </Label>
     );
   return (
@@ -158,7 +153,7 @@ function FieldShell({
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="mt-2 text-xs text-ember-400"
+            className="mt-2 text-xs text-red"
           >
             {error}
           </motion.p>
@@ -276,7 +271,7 @@ export function CheckField({ name, label, hint, className }: Omit<Base, "require
           {label}
         </Label>
       </div>
-      {(error || hint) && <p className={cn("mt-2 pl-8 text-xs", error ? "text-ember-400" : "text-muted-foreground")}>{error ?? hint}</p>}
+      {(error || hint) && <p className={cn("mt-2 pl-8 text-xs", error ? "text-red" : "text-muted-foreground")}>{error ?? hint}</p>}
     </div>
   );
 }

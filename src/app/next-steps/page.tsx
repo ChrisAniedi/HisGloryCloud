@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/site/page-hero";
 import { NextSteps } from "@/components/sections/next-steps";
-import { Grow } from "@/components/sections/grow";
 import { CtaBand } from "@/components/site/cta-band";
 
 export const metadata: Metadata = {
@@ -13,14 +12,11 @@ export default function NextStepsPage() {
   return (
     <>
       <PageHero
-        eyebrow="Next steps"
-        lines={[{ text: "Your journey" }, { text: "starts here.", em: true, className: "text-glory" }]}
-        body="Wherever you are with God today, there’s a next step — and a family ready to take it with you."
+        kicker="Next steps"
+        title="Where are you with God today?"
+        intro="Wherever you are, there’s a next step, and people ready to take it with you. Pick the one that sounds like you."
       />
-      <NextSteps />
-      <div className="bg-ink-900 pt-28" />
-      <Grow />
-      <div className="bg-ink-900 pt-[clamp(5rem,10vw,8rem)]" />
+      <NextSteps heading={false} />
       <CtaBand />
     </>
   );

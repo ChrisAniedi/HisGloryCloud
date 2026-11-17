@@ -10,8 +10,8 @@ function Toaster(props: ToasterProps) {
       className="toaster group"
       toastOptions={{
         classNames: {
-          toast: "!rounded-2xl !border-white/10 !bg-ink-800/95 !backdrop-blur-xl !text-bone-100",
-          description: "!text-bone-100/60",
+          toast: "!rounded-md !border-line !bg-ink !text-paper",
+          description: "!text-on-ink-muted",
         },
       }}
       {...props}

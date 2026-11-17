@@ -2,155 +2,130 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { motion, useMotionValueEvent, useScroll } from "motion/react";
-import { ArrowRight, Menu } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Logo } from "./logo";
-import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { nav, church, gatherings, socials } from "@/lib/site";
-import { SocialLinks } from "./social-icons";
-import { useServiceStatus } from "./use-service-status";
-import { LiveDot } from "./live-dot";
+import { MenuOverlay } from "./menu-overlay";
+import { NextStepPanel } from "./next-step-panel";
+import { primaryNav } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
+const ease = [0.16, 1, 0.3, 1] as const;
+
+/**
+ * Top bar: the church's own menu on the left, the logo centred, "Next step" (a side panel, as on
+ * the current site) and "Menu" (full-screen) on the right. Clear at the top of the page, frosted
+ * once it moves, dark over dark sections (data-nav="dark"). Tucks away reading down, returns going up.
+ */
 export function Header() {
   const pathname = usePathname();
   const { scrollY } = useScroll();
-  const [scrolled, setScrolled] = useState(false);
+  const [moved, setMoved] = useState(false);
   const [hidden, setHidden] = useState(false);
-  const [open, setOpen] = useState(false);
-  const live = useServiceStatus(15_000)?.status.state === "live";
+  const [overDark, setOverDark] = useState(false);
+  const [menu, setMenu] = useState(false);
+  const [step, setStep] = useState(false);
+
+  const checkDark = useCallback(() => {
+    const hit = document.elementsFromPoint(window.innerWidth / 2, 38).find((el) => !el.closest("header"));
+    setOverDark(!!hit?.closest('[data-nav="dark"]'));
+  }, []);
 
   useMotionValueEvent(scrollY, "change", (y) => {
     const prev = scrollY.getPrevious() ?? 0;
-    setScrolled(y > 24);
-    setHidden(y > 400 && y > prev + 4 && !open);
-    if (y < prev - 4) setHidden(false);
+    setMoved(y > 8);
+    if (y > 600 && y > prev + 2) setHidden(true);
+    else if (y < prev - 2 || y <= 600) setHidden(false);
+    checkDark();
   });
+  useEffect(() => {
+    const id = requestAnimationFrame(checkDark);
+    return () => cancelAnimationFrame(id);
+  }, [pathname, checkDark]);
 
-  const isActive = (href: string) => pathname === href || pathname.startsWith(href + "/");
+  const dark = overDark && !menu;
+  const active = (href: string) => pathname === href || pathname.startsWith(href + "/");
 
   return (
-    <motion.header
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: hidden ? -110 : 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="fixed inset-x-0 top-0 z-50 px-3 pt-3 md:px-5 md:pt-4"
-    >
-      <div
+    <>
+      <motion.header
         className={cn(
-          "mx-auto flex h-16 max-w-[88rem] items-center justify-between gap-4 rounded-full px-3 pl-5 text-bone-100 transition-all duration-500 ease-[var(--ease-glory)] md:h-[4.25rem]",
-          scrolled
-            ? "border border-white/10 bg-ink-950/65 shadow-2xl shadow-black/30 backdrop-blur-2xl"
-            : "border border-transparent bg-transparent"
+          "fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,color] duration-500",
+          menu
+            ? "bg-transparent text-white"
+            : dark
+              ? "bg-night/55 text-white shadow-[inset_0_-1px_0_rgba(255,255,255,0.1)] backdrop-blur-2xl backdrop-saturate-150"
+              : moved
+                ? "bg-white/70 text-ink shadow-[inset_0_-1px_0_rgba(221,210,192,0.8),0_12px_32px_-22px_rgba(35,29,23,0.35)] backdrop-blur-2xl backdrop-saturate-150"
+                : "bg-transparent text-ink shadow-[inset_0_-1px_0_rgba(221,210,192,0.6)]"
         )}
+        animate={{ y: hidden && !menu && !step ? -84 : 0 }}
+        transition={{ duration: 0.45, ease }}
       >
-        <Logo />
-
-        <nav aria-label="Primary" className="hidden lg:block">
-          <ul className="flex items-center gap-1 rounded-full border border-white/10 bg-white/[0.04] p-1 backdrop-blur-md">
-            {nav.map((item) => (
-              <li key={item.href} className="relative">
-                <Link
-                  href={item.href}
-                  className={cn(
-                    "relative z-10 block rounded-full px-4 py-2 text-sm transition-colors",
-                    isActive(item.href) ? "text-ink-950" : "text-bone-100/75 hover:text-bone-50"
-                  )}
-                >
-                  {item.label}
-                </Link>
-                {isActive(item.href) && (
-                  <motion.span
-                    layoutId="nav-pill"
-                    className="absolute inset-0 rounded-full bg-bone-100"
-                    transition={{ type: "spring", stiffness: 380, damping: 32 }}
-                  />
+        <div className="container-x grid h-[76px] grid-cols-[1fr_auto] items-center gap-6 lg:grid-cols-[1fr_auto_1fr]">
+          <motion.nav aria-label="Main" className="-ml-2.5 hidden items-center lg:flex" animate={{ opacity: menu ? 0 : 1 }} style={{ pointerEvents: menu ? "none" : "auto" }}>
+            {primaryNav.map((l) => (
+              <Link
+                key={l.href + l.label}
+                href={l.href}
+                aria-current={active(l.href) ? "page" : undefined}
+                className={cn(
+                  "relative flex h-[76px] items-center px-2.5 text-[0.93rem] font-medium transition-colors",
+                  active(l.href) ? (dark ? "text-cream" : "text-red") : dark ? "text-white/85 hover:text-white" : "text-ink-soft hover:text-ink"
                 )}
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <div className="flex items-center gap-2">
-          {live && (
-            <a
-              href={socials.youtube.href}
-              target="_blank"
-              rel="noreferrer"
-              className="hidden items-center gap-2 rounded-full border border-ember-500/40 bg-ember-500/15 px-4 py-2 text-xs font-medium text-ember-400 sm:flex"
-            >
-              <LiveDot /> Live now
-            </a>
-          )}
-          <Button asChild variant="glory" size="sm" className="hidden h-10 px-5 sm:inline-flex">
-            <Link href="/visit">
-              Plan a visit
-              <ArrowRight className="transition-transform group-hover/button:translate-x-0.5" />
-            </Link>
-          </Button>
-
-          <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger asChild>
-              <button
-                className="grid size-11 place-items-center rounded-full border border-white/15 bg-white/[0.04] backdrop-blur-md transition-colors hover:bg-white/10 lg:hidden"
-                aria-label="Open menu"
               >
-                <Menu className="size-5" />
-              </button>
-            </SheetTrigger>
-            <SheetContent side="right" className="border-white/10 bg-ink-950 p-0 text-bone-100 sm:max-w-lg">
-              <div className="relative flex h-full flex-col overflow-y-auto px-7 pt-24 pb-8">
-                <div aria-hidden className="pointer-events-none absolute -top-40 right-[-30%] size-[34rem] rounded-full bg-glory-500/25 blur-[120px]" />
-                <SheetTitle className="sr-only">Menu</SheetTitle>
-                <SheetDescription className="sr-only">Site navigation</SheetDescription>
-                <nav aria-label="Mobile">
-                  <ul className="flex flex-col">
-                    {[{ label: "Home", href: "/" }, ...nav].map((item, i) => (
-                      <motion.li
-                        key={item.href}
-                        initial={{ opacity: 0, x: 24 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.08 + i * 0.05, duration: 0.6 }}
-                      >
-                        <Link
-                          href={item.href}
-                          onClick={() => setOpen(false)}
-                          className={cn(
-                            "group flex items-center justify-between border-b border-white/10 py-4 font-serif text-4xl transition-colors",
-                            (item.href === "/" ? pathname === "/" : isActive(item.href)) ? "text-glory-300" : "hover:text-glory-200"
-                          )}
-                        >
-                          {item.label}
-                          <ArrowRight className="size-5 -translate-x-2 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100" />
-                        </Link>
-                      </motion.li>
-                    ))}
-                  </ul>
-                </nav>
+                {l.label}
+                {active(l.href) && <span className="absolute inset-x-2.5 bottom-0 h-[3px] rounded-t-full bg-current" />}
+              </Link>
+            ))}
+          </motion.nav>
 
-                <div className="mt-10 grid grid-cols-2 gap-3">
-                  {gatherings.map((g) => (
-                    <div key={g.id} className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                      <p className="eyebrow !text-[0.6rem] text-glory-300">{g.short}</p>
-                      <p className="mt-2 text-sm text-bone-100/80">{g.timeLabel}</p>
-                    </div>
-                  ))}
-                </div>
-                <p className="mt-4 text-sm leading-relaxed text-bone-100/55">{church.address.full}</p>
+          <Logo onDark={dark || menu} className="lg:justify-self-center" />
 
-                <div className="mt-auto flex items-center justify-between pt-10">
-                  <SocialLinks />
-                  <Button asChild variant="glory" size="sm">
-                    <Link href="/visit" onClick={() => setOpen(false)}>Plan a visit</Link>
-                  </Button>
-                </div>
-              </div>
-            </SheetContent>
-          </Sheet>
+          <div className="flex items-center justify-self-end gap-2 sm:gap-3">
+            <button
+              type="button"
+              onClick={() => setStep(true)}
+              aria-haspopup="dialog"
+              className={cn(
+                "group hidden h-11 items-center gap-2 rounded-full bg-red pr-1.5 pl-5 text-[0.93rem] font-semibold text-white transition-[background-color,opacity] hover:bg-red-dark sm:inline-flex",
+                menu && "pointer-events-none opacity-0"
+              )}
+            >
+              Next step
+              <span className="grid size-8 place-items-center rounded-full bg-white/15 transition-transform group-hover:rotate-45">
+                <ArrowUpRight className="size-4" />
+              </span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setMenu((v) => !v)}
+              aria-expanded={menu}
+              aria-controls="site-menu"
+              aria-label={menu ? "Close menu" : "Open menu"}
+              className={cn(
+                "relative z-[90] flex min-h-11 items-center gap-3 rounded-full pr-4 pl-5 text-[0.93rem] font-semibold transition-colors",
+                dark || menu ? "bg-white/10 text-white ring-1 ring-white/20 ring-inset hover:bg-white/20" : "bg-night text-white hover:bg-night-soft"
+              )}
+            >
+              <span aria-hidden className="relative block h-5 overflow-hidden">
+                <motion.span className="block" animate={{ y: menu ? "-50%" : "0%" }} transition={{ duration: 0.4, ease }}>
+                  <span className="block h-5 leading-5">Menu</span>
+                  <span className="block h-5 leading-5">Close</span>
+                </motion.span>
+              </span>
+              <span aria-hidden className="relative block h-3 w-5">
+                <motion.span className="absolute left-0 h-[2px] w-5 rounded-full bg-current" animate={menu ? { top: 5, rotate: 45 } : { top: 1, rotate: 0 }} transition={{ duration: 0.4, ease }} />
+                <motion.span className="absolute right-0 h-[2px] rounded-full bg-glow" animate={menu ? { top: 5, rotate: -45, width: 20 } : { top: 9, rotate: 0, width: 12 }} transition={{ duration: 0.4, ease }} />
+              </span>
+            </button>
+          </div>
         </div>
-      </div>
-    </motion.header>
+      </motion.header>
+
+      <MenuOverlay open={menu} onOpenChange={setMenu} />
+      <NextStepPanel open={step} onOpenChange={setStep} />
+    </>
   );
 }

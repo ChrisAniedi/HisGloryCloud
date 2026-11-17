@@ -29,6 +29,17 @@ export const church = {
   url: "https://hisglorycloudchurch.org",
 } as const;
 
+/**
+ * Contact. The church's current site lists no phone or WhatsApp number. Put the WhatsApp
+ * number here in international form without "+" (e.g. "2348012345678") and the floating
+ * WhatsApp button will open a chat; until then it opens the pastoral care page.
+ */
+export const contact = {
+  whatsapp: null as string | null,
+};
+export const waLink = (text = "Hello HGC, I would like some help.") =>
+  contact.whatsapp ? `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(text)}` : null;
+
 export const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(church.address.full)}`;
 export const mapsEmbedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(church.address.full)}&z=15&output=embed`;
 
@@ -60,7 +71,7 @@ export const gatherings: Gathering[] = [
     dayLabel: "Every Sunday",
     start: [9, 0],
     end: [12, 0],
-    timeLabel: "9:00 AM – 12:00 PM",
+    timeLabel: "9am – 12pm",
     description:
       "Our main gathering. Powerful worship, the Word preached with fire, and a family that can’t wait to meet you.",
   },
@@ -72,9 +83,9 @@ export const gatherings: Gathering[] = [
     dayLabel: "Every Wednesday",
     start: [18, 0],
     end: [19, 0],
-    timeLabel: "6:00 PM – 7:00 PM",
+    timeLabel: "6pm – 7pm",
     description:
-      "An hour in the middle of the week to recalibrate — prayer, teaching and a refreshing of the Spirit.",
+      "An hour in the middle of the week to reset: prayer, teaching and a refreshing of the Spirit.",
   },
 ];
 
@@ -92,7 +103,7 @@ export const nextSteps = [
     href: "/prayer",
     eyebrow: "We intercede",
     title: "I need prayer",
-    blurb: "Send in your request — our prayer squad will stand in agreement with you.",
+    blurb: "Send in your request and our prayer squad will stand in agreement with you.",
     cta: "Let’s pray",
   },
   {
@@ -161,7 +172,7 @@ export const coreValues = [
   { title: "The Gospel", body: "Spreading the gospel of our Lord Jesus with signs, wonders and the power of God as of old." },
   { title: "Media", body: "Broadcasting the Word across media platforms so no distance can keep anyone from the message." },
   { title: "Outreach", body: "Taking the love of Christ beyond our walls through evangelism and outreach programs." },
-  { title: "Philanthropy", body: "Providing for families in need — being the hands and feet of Jesus in practical ways." },
+  { title: "Philanthropy", body: "Providing for families in need, and being the hands and feet of Jesus in practical ways." },
   { title: "Community", body: "Contributing to our community and raising leaders who carry God’s glory into every sphere." },
 ] as const;
 
@@ -199,7 +210,7 @@ export const trainingFaqs = [
   },
   {
     q: "Who can join?",
-    a: "Anyone with a passion to know God more and serve in ministry — whether you’re a new believer or already serving in a department.",
+    a: "Anyone with a passion to know God more and serve in ministry, whether you’re a new believer or already serving in a department.",
   },
   {
     q: "How long does it last?",
@@ -230,19 +241,19 @@ export const trainingFaqs = [
 export const visitFaqs = [
   {
     q: "What time should I arrive?",
-    a: "Sunday Service starts at 9:00 AM. Arriving 10–15 minutes early gives you time to settle in — our Greeters Unit will meet you at the door.",
+    a: "Sunday Service starts at 9am. Come 10 to 15 minutes early to settle in. Our Greeters Unit will meet you at the door.",
   },
   {
     q: "What should I wear?",
-    a: "Come as you are. You’ll see everything from Sunday best to casual — what matters is that you’re here.",
+    a: "Come as you are. You’ll see everything from Sunday best to casual. What matters is that you’re here.",
   },
   {
     q: "How long is the service?",
-    a: "Sunday Service runs from 9:00 AM to 12:00 PM. Midweek Service on Wednesday is one hour, 6:00 – 7:00 PM.",
+    a: "Sunday Service runs from 9am to 12pm. Midweek Service on Wednesday is one hour, from 6pm to 7pm.",
   },
   {
     q: "Can I watch online?",
-    a: "Yes — services stream on our YouTube channel. You can join from anywhere in the world.",
+    a: "Yes. Services stream on our YouTube channel. You can join from anywhere in the world.",
   },
   {
     q: "I just gave my life to Christ. What now?",
@@ -258,14 +269,33 @@ export const nav = [
   { label: "Give", href: "/give" },
 ] as const;
 
+/** The church's own menu, as on hisglorycloudchurch.org. */
+export const primaryNav = [
+  { label: "About Us", href: "/about" },
+  { label: "Ministry Training", href: "/training" },
+  { label: "Outreach", href: "/give" },
+  { label: "Pastoral Services", href: "/pastoral-care" },
+] as const;
+
+/** The "Next step" panel, in the church's own words. */
+export const nextStepLinks = [
+  { title: "Salvation", body: "Just accepted Jesus Christ as your Lord and Saviour?", href: "/salvation" },
+  { title: "Join the workforce", body: "Ready to connect? Start your journey here.", href: "/serve" },
+  { title: "Prayer request", body: "Need prayer? We are available.", href: "/prayer" },
+  { title: "Share testimony", body: "Share about the goodness of God and encourage others.", href: "/testimony" },
+] as const;
+
 /**
- * Media slots. Drop real photography / Higgsfield renders into /public/media
- * and set the paths here. `null` renders a generative "glory" placeholder.
+ * Photography. Files live in /public/media. `null` leaves the slot out (or shows
+ * a plain placeholder where a picture is needed).
  */
 export const media = {
-  heroVideo: null as string | null, // e.g. "/media/hero-glory-cloud.mp4"  (Higgsfield render)
-  heroPoster: null as string | null,
-  community: null as string | null, // e.g. "/media/community.jpg"
-  leader: null as string | null, // e.g. "/media/apostle.jpg"
-  worship: null as string | null,
+  // Photos from the church's own site (hisglorycloudchurch.org). Swap in new ones in /public/media.
+  worship: "/media/worship-hands.jpg" as string | null,
+  prayer: "/media/in-prayer.jpg" as string | null,
+  thanksgiving: "/media/thanksgiving.jpg" as string | null,
+  leader: null as string | null, // e.g. "/media/apostle.jpg" (a proper portrait for the About page)
+  // Small circular portrait, cropped from a frame of one of his YouTube messages. Fine at avatar size only.
+  // Not shown for now (owner, 2026-11-17). To bring it back: "/media/pastor.jpg" (file kept).
+  pastor: null as string | null,
 };

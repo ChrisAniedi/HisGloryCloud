@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { FormPage } from "@/components/site/form-page";
 import { PastoralForm } from "@/components/forms/forms";
-import { Reveal } from "@/components/motion/reveal";
 import { pastoralOccasions } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -12,28 +11,25 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <FormPage
-      eyebrow="Pastoral services"
-      lines={[{ text: "Care for every" }, { text: "season of life.", em: true, className: "text-glory" }]}
-      body="Our pastoral services nurture spiritual growth, offer guidance, and provide care for every member of the church family — rooted in compassion and the Word of God."
+      kicker="Pastoral services"
+      title="Care for every season of life"
+      intro="Our pastoral services offer guidance and care for every member of the church family, rooted in compassion and the Word of God."
       formTitle="Book a pastoral service"
-      formIntro="Tell us what you’re celebrating and the pastoral office will be in touch."
+      formIntro="Tell us what you’re celebrating or going through, and the pastoral office will be in touch."
       aside={
         <>
-          <Reveal>
-            <p className="text-lg leading-relaxed text-bone-100/70">
-              Our pastors are committed to supporting you through life’s challenges — through personal counselling, family guidance, or spiritual mentorship — and to celebrating your milestones with you.
-            </p>
-          </Reveal>
-          <Reveal delay={0.1} className="mt-10">
-            <h3 className="eyebrow text-bone-100/50">We can help with</h3>
-            <ul className="mt-5 grid grid-cols-2 gap-2">
+          <p className="text-lg text-muted">
+            Our pastors are here for life’s hard moments, through counselling, family guidance or spiritual mentorship, and
+            they’d love to celebrate your milestones with you too.
+          </p>
+          <div className="mt-10">
+            <h3 className="text-lg font-semibold">We can help with</h3>
+            <ul className="mt-4 grid grid-cols-2 gap-x-6 border-t border-line">
               {pastoralOccasions.map((o) => (
-                <li key={o} className="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-bone-100/80">
-                  {o}
-                </li>
+                <li key={o} className="border-b border-line py-2.5 text-muted">{o}</li>
               ))}
             </ul>
-          </Reveal>
+          </div>
         </>
       }
     >

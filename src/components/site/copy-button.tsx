@@ -18,11 +18,11 @@ export function CopyButton({ value, label = "Copy", className }: { value: string
           toast.success("Account number copied", { description: value });
           setTimeout(() => setCopied(false), 2200);
         } catch {
-          toast.error("Couldn’t copy — please copy it manually.");
+          toast.error("Couldn’t copy. Please copy it manually.");
         }
       }}
       className={cn(
-        "inline-flex h-10 items-center gap-2 rounded-full border border-current/20 px-4 text-sm font-medium transition-all hover:border-current/40 hover:bg-current/[0.04] active:scale-95",
+        "inline-flex h-10 items-center gap-2 rounded-full border border-ink/20 bg-white px-4 text-sm font-semibold transition-colors hover:border-ink/50",
         className
       )}
       aria-label={`${label}: ${value}`}
@@ -30,7 +30,7 @@ export function CopyButton({ value, label = "Copy", className }: { value: string
       <span className="relative grid size-4 place-items-center">
         <AnimatePresence mode="popLayout" initial={false}>
           <motion.span key={copied ? "c" : "n"} initial={{ scale: 0, rotate: -45 }} animate={{ scale: 1, rotate: 0 }} exit={{ scale: 0 }}>
-            {copied ? <Check className="size-4 text-glory-500" /> : <Copy className="size-4" />}
+            {copied ? <Check className="size-4 text-red" /> : <Copy className="size-4" />}
           </motion.span>
         </AnimatePresence>
       </span>

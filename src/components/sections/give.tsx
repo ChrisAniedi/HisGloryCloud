@@ -1,61 +1,35 @@
 import Link from "next/link";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
-import { BankCard } from "@/components/site/bank-card";
-import { Button } from "@/components/ui/button";
-import { giving, scriptures } from "@/lib/site";
+import { LineArt } from "@/components/motion/line-art";
+import { art } from "@/lib/drawings";
+import { BankDetails } from "@/components/site/bank-details";
+import { Chip } from "@/components/site/section-intro";
+import { scriptures } from "@/lib/site";
 
+/** Giving, on the brand red, with a soft card, the account details and open hands that draw themselves. */
 export function Give() {
   return (
-    <section className="dark-section section-y relative isolate overflow-hidden bg-ink-900 text-bone-100">
-      <div aria-hidden className="absolute top-1/3 left-[-10%] -z-10 size-[36rem] rounded-full bg-glory-500/15 blur-[140px]" />
-      <div className="container-x grid gap-16 lg:grid-cols-12 lg:items-center">
-        <div className="lg:col-span-6">
-          <Reveal>
-            <p className="eyebrow flex items-center gap-3 text-glory-300">
-              <span className="h-px w-8 bg-current" /> Give & outreach
-            </p>
-          </Reveal>
-          <Reveal delay={0.05}>
-            <h2 className="text-display mt-6 text-5xl md:text-7xl">
-              Sow a seed. <em className="text-glory">Shine His light.</em>
-            </h2>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <p className="mt-8 max-w-xl text-lg leading-relaxed text-bone-100/60">
-              Our mission extends beyond the walls of our church. Your generosity lets us be the hands and feet of Jesus — bringing hope and healing to our community and beyond.
-            </p>
-          </Reveal>
-          <Reveal delay={0.15}>
-            <ul className="mt-10 grid gap-4 sm:grid-cols-2">
-              {giving.impact.map((item) => (
-                <li key={item} className="flex gap-3 text-[15px] leading-snug text-bone-100/80">
-                  <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-glory-400/15 text-glory-300">
-                    <Check className="size-3" strokeWidth={3} />
-                  </span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-          <Reveal delay={0.2} className="mt-10">
-            <Button asChild variant="glass" size="lg">
-              <Link href="/give">
-                Why we give <ArrowRight className="transition-transform group-hover/button:translate-x-0.5" />
-              </Link>
-            </Button>
-          </Reveal>
-        </div>
-
-        <div className="lg:col-span-6 lg:pl-8">
-          <Reveal delay={0.1}>
-            <BankCard />
-          </Reveal>
-          <Reveal delay={0.2}>
-            <blockquote className="mt-10 border-l border-glory-400/40 pl-6">
-              <p className="font-serif text-2xl leading-snug text-bone-100/85 italic">“{scriptures.giving.text}”</p>
-              <footer className="eyebrow mt-4 text-bone-100/40">{scriptures.giving.ref}</footer>
-            </blockquote>
+    <section data-nav="dark" className="px-2 pb-2 md:px-3 md:pb-3">
+      <div className="relative overflow-hidden rounded-[24px] bg-red py-[clamp(3rem,7vw,5rem)] md:rounded-[28px]">
+        <div className="container-x">
+          <Reveal y={40}>
+            <div className="relative grid gap-10 overflow-hidden rounded-[22px] bg-[#fbeeea] p-6 text-night md:p-10 lg:grid-cols-12 lg:items-center lg:gap-12 lg:p-14">
+              <LineArt strokes={art.hands} viewBox="0 0 240 160" width={1.6} color="#a8231c" accent="#a8231c" className="pointer-events-none absolute top-6 right-8 hidden h-36 w-56 opacity-70 lg:block" />
+              <div className="relative lg:col-span-6">
+                <Chip>Give & outreach</Chip>
+                <h2 className="mt-5 text-[clamp(2.4rem,5vw,4rem)] leading-[0.98] font-medium tracking-[-0.045em]">Give towards the work.</h2>
+                <p className="mt-4 max-w-md text-lg text-night/70">Your generosity keeps the doors open and reaches past them: families in need, outreach, and missions where the gospel hasn’t reached yet.</p>
+                <blockquote className="mt-6 border-l-2 border-red pl-5">
+                  <p className="font-serif text-lg italic">“{scriptures.giving.text}”</p>
+                  <footer className="mt-1.5 text-sm font-medium text-night/60">{scriptures.giving.ref}</footer>
+                </blockquote>
+                <Link href="/give" className="group mt-7 inline-flex items-center gap-1.5 font-semibold underline underline-offset-4">
+                  How your giving is used <ArrowUpRight className="size-4 transition-transform group-hover:rotate-45" />
+                </Link>
+              </div>
+              <BankDetails className="relative lg:col-span-5 lg:col-start-8 lg:mt-36" />
+            </div>
           </Reveal>
         </div>
       </div>

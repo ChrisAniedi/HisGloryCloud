@@ -1,19 +1,19 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
+import { Inter_Tight, Source_Serif_4 } from "next/font/google";
+import { MotionProvider } from "@/components/motion/motion-provider";
 import { Header } from "@/components/site/header";
 import { Footer } from "@/components/site/footer";
-import { SmoothScroll } from "@/components/motion/smooth-scroll";
+import { WhatsAppFloat } from "@/components/site/whatsapp-float";
 import { Toaster } from "@/components/ui/sonner";
 import { church, gatherings, socials } from "@/lib/site";
 import "./globals.css";
 
-const geist = Geist({ variable: "--font-geist", subsets: ["latin"], display: "swap" });
-const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"], display: "swap" });
-const instrument = Instrument_Serif({
-  variable: "--font-instrument",
+const sans = Inter_Tight({ variable: "--font-inter-tight", subsets: ["latin"], display: "swap" });
+const serif = Source_Serif_4({
+  variable: "--font-source-serif",
   subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
+  axes: ["opsz"],
+  style: ["italic"],
   display: "swap",
 });
 
@@ -37,8 +37,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0c0a09",
-  colorScheme: "dark",
+  themeColor: "#14100d",
+  colorScheme: "light",
 };
 
 const jsonLd = {
@@ -74,20 +74,21 @@ const jsonLd = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${geist.variable} ${geistMono.variable} ${instrument.variable}`}>
+    <html lang="en" className={`${sans.variable} ${serif.variable}`}>
       <body className="min-h-dvh overflow-x-clip">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-full focus:bg-glory-400 focus:px-5 focus:py-3 focus:text-ink-950"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-md focus:bg-ink focus:px-5 focus:py-3 focus:text-paper"
         >
           Skip to content
         </a>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-        <SmoothScroll>
+        <MotionProvider>
           <Header />
           <main id="main">{children}</main>
           <Footer />
-        </SmoothScroll>
+          <WhatsAppFloat />
+        </MotionProvider>
         <Toaster />
       </body>
     </html>

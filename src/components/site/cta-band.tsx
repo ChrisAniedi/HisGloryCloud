@@ -1,43 +1,29 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import { Atmosphere } from "@/components/motion/glory-cloud";
-import { Reveal } from "@/components/motion/reveal";
-import { Magnetic } from "@/components/motion/magnetic";
 import { Button } from "@/components/ui/button";
-import { gatherings } from "@/lib/site";
+import { church, gatherings } from "@/lib/site";
 
 export function CtaBand({
-  title = (
-    <>
-      This Sunday could <em className="text-glory">change everything.</em>
-    </>
-  ),
-  body = `Join us every ${gatherings[0].short}, ${gatherings[0].timeLabel} — we saved you a seat.`,
+  title = `Join us this ${gatherings[0].short} at 9am`,
+  body = `${church.address.line1}, ${church.address.line2}, ${church.address.city}. Come as you are. Someone will be at the door to welcome you.`,
 }: {
-  title?: React.ReactNode;
+  title?: string;
   body?: string;
 }) {
   return (
-    <section className="bg-ink-900 pb-[clamp(5rem,10vw,8rem)] text-bone-50">
-      <div className="container-x">
-        <Reveal>
-          <Atmosphere tone="glory" className="rounded-[2.5rem] px-6 py-20 text-center md:px-16 md:py-28">
-            <h2 className="text-display mx-auto max-w-4xl text-5xl text-balance md:text-8xl">{title}</h2>
-            <p className="mx-auto mt-6 max-w-xl text-lg text-bone-100/75">{body}</p>
-            <div className="mt-10 flex flex-wrap justify-center gap-3">
-              <Magnetic>
-                <Button asChild variant="glory" size="xl">
-                  <Link href="/visit">
-                    Plan your visit <ArrowRight className="size-5 transition-transform group-hover/button:translate-x-1" />
-                  </Link>
-                </Button>
-              </Magnetic>
-              <Button asChild variant="glass" size="xl">
-                <Link href="/next-steps">Explore next steps</Link>
-              </Button>
-            </div>
-          </Atmosphere>
-        </Reveal>
+    <section className="bg-red text-white">
+      <div className="container-x flex flex-col gap-8 py-14 md:flex-row md:items-center md:justify-between md:py-16">
+        <div className="max-w-2xl">
+          <h2 className="heading-2">{title}</h2>
+          <p className="mt-3 text-lg text-white">{body}</p>
+        </div>
+        <div className="flex flex-wrap gap-3">
+          <Button asChild variant="light" size="lg">
+            <Link href="/visit">Plan your visit</Link>
+          </Button>
+          <Button asChild variant="outline-light" size="lg">
+            <Link href="/watch">Watch online</Link>
+          </Button>
+        </div>
       </div>
     </section>
   );

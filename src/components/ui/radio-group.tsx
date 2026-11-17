@@ -18,7 +18,7 @@ function RadioChip({
     <RadioGroupPrimitive.Item
       data-slot="radio-group-item"
       className={cn(
-        "inline-flex h-11 items-center justify-center gap-2 rounded-full border border-input bg-foreground/[0.03] px-5 text-sm transition-all outline-none hover:border-foreground/25 focus-visible:ring-[3px] focus-visible:ring-ring/30 data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground",
+        "inline-flex h-11 items-center justify-center gap-2 rounded-md border border-input bg-white px-4 text-sm transition-all outline-none hover:border-foreground/25 focus-visible:ring-[3px] focus-visible:ring-ring/30 data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground",
         className
       )}
       {...props}

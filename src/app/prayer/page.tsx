@@ -10,10 +10,9 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <FormPage
-      eyebrow="We intercede"
-      crumb="Prayer request"
-      lines={[{ text: "You don’t have" }, { text: "to pray alone.", em: true, className: "text-glory" }]}
-      body="Whatever you’re carrying, bring it here. Our prayer squad will take your request before the Lord and stand in agreement with you."
+      kicker="Prayer request"
+      title="You don’t have to pray alone"
+      intro="Whatever you’re carrying, bring it here. Our prayer squad will take your request before the Lord and stand in agreement with you."
       formTitle="Send a prayer request"
       formIntro="Share as much or as little as you’re comfortable with."
       aside={

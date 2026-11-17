@@ -47,11 +47,11 @@ export function SalvationForm() {
 export function PrayerForm() {
   return (
     <SiteForm kind="prayer" submitLabel="Send my request" successTitle="We’re praying with you">
-      <TextField name="name" label="Name" autoComplete="name" hint="Optional — you can stay anonymous." />
+      <TextField name="name" label="Name" autoComplete="name" hint="Optional. You can stay anonymous." />
       <Contact phoneRequired={false} />
       <SelectField name="topic" label="What can we pray about?" options={["Healing", "Family", "Finances", "Career", "Salvation", "Guidance", "Other"]} required />
       <TextAreaField name="request" label="Your prayer request" placeholder="Share as much or as little as you like…" required rows={6} />
-      <CheckField name="confidential" label="Keep this confidential — only the pastoral prayer team should see it." />
+      <CheckField name="confidential" label="Keep this confidential. Only the pastoral prayer team should see it." />
     </SiteForm>
   );
 }
@@ -62,7 +62,7 @@ export function TestimonyForm() {
       <TextField name="name" label="Full name" autoComplete="name" required />
       <Contact phoneRequired={false} />
       <TextField name="title" label="Give it a title" placeholder="e.g. God restored my health" required />
-      <TextAreaField name="story" label="What did God do?" placeholder="Tell us the story — where you were, what happened, and how God showed up." required rows={8} />
+      <TextAreaField name="story" label="What did God do?" placeholder="Tell us the story: where you were, what happened, and how God showed up." required rows={8} />
       <CheckField name="consent" label="I’m happy for HGC to share my testimony to encourage others." />
     </SiteForm>
   );

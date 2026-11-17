@@ -1,20 +1,18 @@
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
-import { GloryCloud } from "@/components/motion/glory-cloud";
 import { Button } from "@/components/ui/button";
 
 export default function NotFound() {
   return (
-    <section className="relative isolate grid min-h-[100svh] place-items-center overflow-hidden px-6 text-center text-bone-50">
-      <GloryCloud intensity={0.6} className="-z-10" />
-      <div>
-        <p className="eyebrow text-glory-300">404 · Page not found</p>
-        <h1 className="text-display mt-6 text-[clamp(3.5rem,10vw,8rem)]">
-          This path is <em className="text-glory">unseen.</em>
-        </h1>
-        <p className="mx-auto mt-6 max-w-md text-bone-100/65">The page you’re looking for has moved or doesn’t exist — but you’re always welcome home.</p>
-        <Button asChild variant="glory" size="lg" className="mt-10">
-          <Link href="/"><ArrowLeft /> Back home</Link>
+    <section className="container-x pt-40 pb-24 md:pt-48 md:pb-32">
+      <p className="kicker">Page not found</p>
+      <h1 className="heading-1 mt-3 max-w-2xl">We couldn’t find that page</h1>
+      <p className="mt-5 max-w-xl text-lg text-muted">It may have moved, or the link may be wrong. You’re always welcome home.</p>
+      <div className="mt-8 flex flex-wrap gap-3">
+        <Button asChild size="lg">
+          <Link href="/">Back to the home page</Link>
+        </Button>
+        <Button asChild size="lg" variant="outline">
+          <Link href="/visit">Service times</Link>
         </Button>
       </div>
     </section>

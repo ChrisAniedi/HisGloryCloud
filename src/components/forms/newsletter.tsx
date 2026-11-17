@@ -1,11 +1,12 @@
 "use client";
 
 import { useActionState, startTransition } from "react";
-import { ArrowRight, Check, Loader2 } from "lucide-react";
+import { Check, Loader2 } from "lucide-react";
 import { submitForm } from "@/app/actions";
 import { initialFormState, type FormState } from "@/lib/forms/schemas";
 import { cn } from "@/lib/utils";
 
+/** Email sign-up, styled for the dark footer. */
 export function NewsletterForm({ className }: { className?: string }) {
   const [state, action, pending] = useActionState<FormState, FormData>(submitForm.bind(null, "newsletter"), initialFormState);
   const done = state.status === "success";
@@ -24,12 +25,7 @@ export function NewsletterForm({ className }: { className?: string }) {
         <input type="text" name="company" tabIndex={-1} autoComplete="off" />
       </div>
       <label htmlFor="nl-email" className="sr-only">Email address</label>
-      <div
-        className={cn(
-          "flex h-14 items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] p-1.5 pl-5 transition-colors focus-within:border-glory-400/70",
-          state.status === "error" && "border-ember-500/60"
-        )}
-      >
+      <div className="flex flex-col gap-2 sm:flex-row">
         <input
           id="nl-email"
           name="email"
@@ -37,24 +33,25 @@ export function NewsletterForm({ className }: { className?: string }) {
           required
           disabled={done}
           autoComplete="email"
-          placeholder={done ? "Subscribed — thank you!" : "Your email address"}
+          placeholder={done ? "Subscribed. Thank you!" : "Your email address"}
           aria-invalid={state.status === "error" || undefined}
           aria-describedby="nl-msg"
-          className="min-w-0 flex-1 bg-transparent text-[15px] text-bone-50 outline-none placeholder:text-bone-100/40"
+          className={cn(
+            "h-12 min-w-0 flex-1 rounded-full border bg-white/5 px-5 text-white outline-none placeholder:text-white/45 focus:border-white/60",
+            state.status === "error" ? "border-red-on-ink" : "border-white/15"
+          )}
         />
         <button
           type="submit"
           disabled={pending || done}
-          aria-label="Subscribe"
-          className="group grid h-full shrink-0 place-items-center rounded-full bg-glory-400 px-5 text-sm font-medium text-ink-950 transition-colors hover:bg-glory-300 disabled:opacity-80"
+          className="inline-flex h-12 shrink-0 items-center justify-center gap-2 rounded-full bg-cream px-6 font-semibold text-night transition-colors hover:bg-white disabled:opacity-80"
         >
-          {pending ? <Loader2 className="size-4 animate-spin" /> : done ? <Check className="size-4" /> : (
-            <span className="flex items-center gap-1.5">Subscribe <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" /></span>
-          )}
+          {pending ? <Loader2 className="size-4 animate-spin" /> : done ? <Check className="size-4" /> : null}
+          {done ? "Done" : "Subscribe"}
         </button>
       </div>
-      <p id="nl-msg" aria-live="polite" className={cn("mt-3 min-h-5 pl-5 text-xs", state.status === "error" ? "text-ember-400" : "text-bone-100/50")}>
-        {state.status === "error" ? state.errors?.email ?? state.message : state.status === "success" ? state.message : "News and updates from the Glory Tent. No spam."}
+      <p id="nl-msg" aria-live="polite" className={cn("mt-2 min-h-5 text-sm", state.status === "error" ? "text-red-on-ink" : "text-white/55")}>
+        {state.status === "error" ? state.errors?.email ?? state.message : state.status === "success" ? state.message : ""}
       </p>
     </form>
   );

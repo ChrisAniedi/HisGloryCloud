@@ -1,45 +1,48 @@
 "use client";
 
+import Image from "next/image";
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
-import { Embers } from "@/components/motion/embers";
-import { scriptures } from "@/lib/site";
+import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { Reveal, RevealWords } from "@/components/motion/reveal";
+import { Chip } from "@/components/site/section-intro";
+import { media, scriptures } from "@/lib/site";
 
-/** Scroll-scrubbed reveal of the house vision: UNSEEN HEIGHTS (1 Cor 2:9). */
+/** The house vision, Unseen Heights (1 Corinthians 2:9), over a worship photo that drifts as you scroll. */
 export function Vision() {
   const ref = useRef<HTMLElement>(null);
+  const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const scale = useTransform(scrollYProgress, [0.1, 0.5], [0.82, 1]);
-  const glow = useTransform(scrollYProgress, [0.15, 0.5, 0.85], [0, 1, 0.3]);
-  const y = useTransform(scrollYProgress, [0, 1], ["12%", "-12%"]);
-  const lineScale = useTransform(scrollYProgress, [0.25, 0.55], [0, 1]);
+  const y = useTransform(scrollYProgress, [0, 1], reduce ? ["0%", "0%"] : ["-12%", "12%"]);
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], reduce ? [1, 1, 1] : [1.25, 1.12, 1.25]);
 
   return (
-    <section ref={ref} className="relative isolate -mt-14 overflow-hidden bg-ink-950 pt-[calc(clamp(6rem,14vw,12rem)+3.5rem)] pb-[clamp(6rem,14vw,12rem)] text-bone-50">
-      <motion.div
-        aria-hidden
-        style={{ opacity: glow }}
-        className="absolute top-1/2 left-1/2 -z-10 h-[80%] w-[90%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(247,227,184,0.35),rgba(214,156,69,0.12)_50%,transparent)] blur-2xl"
-      />
-      <Embers density={40} className="absolute inset-0 -z-10 size-full opacity-70" />
-      <div className="grain" />
-
-      <motion.div style={{ y }} className="container-x text-center">
-        <p className="eyebrow text-glory-300">Our vision is simply</p>
-        <motion.h2 style={{ scale }} className="text-display mt-8 text-[clamp(4.5rem,15vw,15rem)] leading-[0.82]">
-          Unseen
-          <br />
-          <em className="text-glory pr-[0.06em]">Heights.</em>
-        </motion.h2>
-        <motion.div style={{ scaleX: lineScale }} className="mx-auto mt-14 h-px w-40 bg-gradient-to-r from-transparent via-glory-300 to-transparent" />
-        <blockquote className="mx-auto mt-10 max-w-3xl">
-          <p className="font-serif text-2xl leading-snug text-bone-100/85 italic md:text-4xl">“{scriptures.vision.text}”</p>
-          <footer className="eyebrow mt-6 text-bone-100/45">{scriptures.vision.ref}</footer>
-        </blockquote>
-        <p className="mx-auto mt-10 max-w-lg text-bone-100/55">
-          Hence, love for God is our mantra at HGC — and we believe the best of what He has prepared is still ahead.
-        </p>
-      </motion.div>
+    <section ref={ref} data-nav="dark" className="px-2 md:px-3">
+      <div className="relative isolate overflow-hidden rounded-[24px] bg-night py-[clamp(6rem,14vw,11rem)] text-white md:rounded-[28px]">
+        {media.worship && (
+          <motion.div aria-hidden className="absolute inset-0 -z-10" style={{ y, scale }}>
+            <Image src={media.worship} alt="" fill sizes="100vw" className="object-cover object-[50%_30%]" />
+          </motion.div>
+        )}
+        <div aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(20,16,13,0.92)_0%,rgba(20,16,13,0.7)_45%,rgba(60,14,10,0.45)_100%)]" />
+        <div aria-hidden className="absolute inset-0 -z-10 bg-[#a8231c]/20 mix-blend-multiply" />
+        <div className="container-x">
+          <Reveal>
+            <Chip onDark>Our vision</Chip>
+          </Reveal>
+          <h2 className="mt-6 text-[clamp(3.5rem,11vw,9.5rem)] leading-[0.9] font-light tracking-[-0.055em]">
+            <RevealWords text="Unseen Heights." />
+          </h2>
+          <Reveal delay={0.2} className="mt-10 grid gap-8 md:grid-cols-12">
+            <blockquote className="md:col-span-7">
+              <p className="font-serif text-[clamp(1.4rem,2.4vw,2rem)] leading-snug italic">“{scriptures.vision.text}”</p>
+              <footer className="mt-3 font-medium text-white/70">{scriptures.vision.ref}</footer>
+            </blockquote>
+            <p className="text-lg text-white/80 md:col-span-4 md:col-start-9 md:self-end">
+              Love for God is our mantra at HGC, and we believe the best of what He has prepared is still ahead.
+            </p>
+          </Reveal>
+        </div>
+      </div>
     </section>
   );
 }

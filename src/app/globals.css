@@ -1,127 +1,66 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
-
 /* ------------------------------------------------------------------
-   HGC design tokens — "The Glory Cloud"
-   ink    : warm night, the canvas the glory shines against
-   bone   : soft cloud-white for light chapters of the page
-   glory  : warm gold light (the presence)
-   ember  : brand red, kept from the original identity, used sparingly
+   HGC design tokens
+   paper / sand : warm, light pages (like a printed church bulletin)
+   ink          : text, and the one dark band (vision) and the footer
+   red          : the heart in the HGC logo, the only accent colour
    ------------------------------------------------------------------ */
 @theme {
-  --color-ink-950: #070605;
-  --color-ink-900: #0c0a09;
-  --color-ink-850: #12100e;
-  --color-ink-800: #1a1714;
-  --color-ink-700: #2a2520;
-  --color-bone-50: #fbf8f2;
-  --color-bone-100: #f4efe6;
-  --color-bone-200: #e9e1d2;
-  --color-bone-300: #d6cab4;
-  --color-glory-200: #f7e3b8;
-  --color-glory-300: #f0cf8c;
-  --color-glory-400: #e8b86b;
-  --color-glory-500: #d69c45;
-  --color-glory-600: #b07a2c;
-  --color-ember-400: #ff6b6d;
-  --color-ember-500: #f64648;
-  --color-ember-600: #d92f31;
+  --color-paper: #f4f1ec;
+  --color-mist: #ebe6df;
+  --color-night: #14100d;
+  --color-night-soft: #221c17;
+  --color-cream: #f3e9d7;
+  --color-cream-muted: #d6c6aa;
+  --color-sand: #efe7d9;
+  --color-sand-deep: #e4d8c4;
+  --color-line: #ddd2c0;
+  --color-ink: #231d17;
+  --color-ink-soft: #3a322a;
+  --color-muted: #665b4e;
+  --color-on-ink-muted: #c2b6a6;
+  --color-red: #a8231c;
+  --color-red-dark: #861a14;
+  --color-red-soft: #f4e2da;
+  --color-red-on-ink: #f0a596;
+  --color-glow: #f06a5b;
 
-  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-instrument), ui-serif, Georgia, serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-sans: var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-source-serif), ui-serif, Georgia, serif;
 
-  --ease-glory: cubic-bezier(0.22, 1, 0.36, 1);
-
-  --animate-drift-a: drift-a 26s ease-in-out infinite;
-  --animate-drift-b: drift-b 32s ease-in-out infinite;
-  --animate-drift-c: drift-c 38s ease-in-out infinite;
-  --animate-rays: rays 60s linear infinite;
-  --animate-marquee: marquee 40s linear infinite;
-  --animate-pulse-ring: pulse-ring 2s var(--ease-glory) infinite;
-  --animate-shimmer: shimmer 3.5s linear infinite;
-
-  @keyframes drift-a {
-    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-    50% { transform: translate3d(6%, -4%, 0) scale(1.08); }
-  }
-  @keyframes drift-b {
-    0%, 100% { transform: translate3d(0, 0, 0) scale(1.05); }
-    50% { transform: translate3d(-8%, 5%, 0) scale(0.95); }
-  }
-  @keyframes drift-c {
-    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-    33% { transform: translate3d(4%, 6%, 0) scale(1.1); }
-    66% { transform: translate3d(-5%, -3%, 0) scale(0.97); }
-  }
-  @keyframes rays {
-    to { transform: translateX(-50%) rotate(360deg); }
-  }
-  @keyframes marquee {
-    to { transform: translateX(-50%); }
-  }
-  @keyframes pulse-ring {
-    0% { transform: scale(0.8); opacity: 0.8; }
-    100% { transform: scale(2.4); opacity: 0; }
-  }
-  @keyframes shimmer {
-    to { background-position: 200% center; }
-  }
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* shadcn semantic tokens — dark is the house default */
+/* shadcn semantic tokens (light is the only theme) */
 :root {
-  --radius: 1rem;
-  --background: var(--color-ink-900);
-  --foreground: var(--color-bone-100);
-  --card: var(--color-ink-850);
-  --card-foreground: var(--color-bone-100);
-  --popover: var(--color-ink-850);
-  --popover-foreground: var(--color-bone-100);
-  --primary: var(--color-glory-400);
-  --primary-foreground: var(--color-ink-950);
-  --secondary: var(--color-ink-800);
-  --secondary-foreground: var(--color-bone-100);
-  --muted: var(--color-ink-800);
-  --muted-foreground: color-mix(in oklab, var(--color-bone-100) 62%, transparent);
-  --accent: var(--color-ink-800);
-  --accent-foreground: var(--color-bone-100);
-  --destructive: var(--color-ember-500);
-  --border: color-mix(in oklab, var(--color-bone-100) 10%, transparent);
-  --input: color-mix(in oklab, var(--color-bone-100) 14%, transparent);
-  --ring: var(--color-glory-400);
-}
-
-/* Light chapters (cream sections) re-scope the same tokens */
-.theme-light {
-  --background: var(--color-bone-100);
-  --foreground: var(--color-ink-900);
-  --card: var(--color-bone-50);
-  --card-foreground: var(--color-ink-900);
-  --popover: var(--color-bone-50);
-  --popover-foreground: var(--color-ink-900);
-  --primary: var(--color-ink-900);
-  --primary-foreground: var(--color-bone-50);
-  --secondary: var(--color-bone-200);
-  --secondary-foreground: var(--color-ink-900);
-  --muted: var(--color-bone-200);
-  --muted-foreground: color-mix(in oklab, var(--color-ink-900) 62%, transparent);
-  --accent: var(--color-bone-200);
-  --accent-foreground: var(--color-ink-900);
-  --border: color-mix(in oklab, var(--color-ink-900) 12%, transparent);
-  --input: color-mix(in oklab, var(--color-ink-900) 16%, transparent);
-  --ring: var(--color-glory-600);
-  background: var(--background);
-  color: var(--foreground);
+  --radius: 0.5rem;
+  --background: var(--color-paper);
+  --foreground: var(--color-ink);
+  --card: #fffdf8;
+  --card-foreground: var(--color-ink);
+  --popover: #fffdf8;
+  --popover-foreground: var(--color-ink);
+  --primary: var(--color-red);
+  --primary-foreground: #ffffff;
+  --secondary: var(--color-sand);
+  --secondary-foreground: var(--color-ink);
+  --muted: var(--color-sand);
+  --muted-foreground: var(--color-muted);
+  --accent: var(--color-sand);
+  --accent-foreground: var(--color-ink);
+  --destructive: var(--color-red);
+  --border: var(--color-line);
+  --input: #cbbfa9;
+  --ring: var(--color-red);
 }
 
 @theme inline {
-  --radius-sm: calc(var(--radius) - 6px);
-  --radius-md: calc(var(--radius) - 4px);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 6px);
+  --radius-xl: calc(var(--radius) + 4px);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -132,7 +71,6 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
@@ -149,15 +87,22 @@
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
+    scroll-padding-top: 5.5rem;
   }
   body {
     @apply bg-background text-foreground font-sans;
-    font-feature-settings: "ss01", "cv11";
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    letter-spacing: -0.005em;
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
   }
   ::selection {
-    background: var(--color-glory-400);
-    color: var(--color-ink-950);
+    background: var(--color-red-soft);
+    color: var(--color-ink);
   }
   :focus-visible {
     outline: 2px solid var(--ring);
@@ -165,72 +110,77 @@
   }
 }
 
-/* Lenis */
-html.lenis,
-html.lenis body { height: auto; }
-.lenis.lenis-smooth { scroll-behavior: auto !important; }
-.lenis.lenis-stopped { overflow: hidden; }
-
 @layer utilities {
-  /* Display typography */
-  .text-display {
-    font-family: var(--font-serif);
-    font-weight: 400;
-    letter-spacing: -0.02em;
-    line-height: 0.92;
-  }
-  .eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-  }
-  .text-glory {
-    background: linear-gradient(
-      100deg,
-      var(--color-glory-300) 0%,
-      var(--color-glory-200) 30%,
-      var(--color-glory-400) 55%,
-      var(--color-glory-300) 80%,
-      var(--color-glory-200) 100%
-    );
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    animation: var(--animate-shimmer);
-    animation-duration: 8s;
-    /* background-clip:text only paints inside the box — give descenders room */
-    padding-block: 0.06em 0.2em;
-    margin-block: -0.06em -0.2em;
-  }
-  .grain {
-    pointer-events: none;
-    position: absolute;
-    inset: 0;
-    opacity: 0.07;
-    mix-blend-mode: overlay;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-  }
-  .hairline {
-    background: linear-gradient(90deg, transparent, var(--border), transparent);
-    height: 1px;
-  }
   .container-x {
     margin-inline: auto;
     width: 100%;
-    max-width: 88rem;
-    padding-inline: clamp(1.25rem, 4vw, 3rem);
+    max-width: 76rem;
+    padding-inline: clamp(1rem, 4vw, 2.5rem);
   }
   .section-y {
-    padding-block: clamp(5rem, 12vw, 10rem);
+    padding-block: clamp(3.5rem, 8vw, 6.5rem);
+  }
+  /* Small label above a heading: plain sentence case, the accent colour */
+  .kicker {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-red);
+  }
+  .heading-1 {
+    font-weight: 500;
+    font-size: clamp(2.5rem, 5.4vw, 4.5rem);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+  }
+  .heading-2 {
+    font-weight: 500;
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
+  .heading-3 {
+    font-weight: 500;
+    font-size: 1.5rem;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+  .link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-weight: 600;
+    color: var(--color-red);
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
+    text-decoration-color: color-mix(in oklab, currentColor 35%, transparent);
+    transition: text-decoration-color 0.2s;
+  }
+  .link-arrow:hover {
+    text-decoration-color: currentColor;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
 }
+
+/* Hero orbits: a gentle bob for the floating circles, a slow turn for the arcs of light. */
+@keyframes orbit-bob {
+  0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+  50% { transform: translate(-50%, -50%) translateY(-10px); }
+}
+@keyframes orbit-turn {
+  to { transform: rotate(360deg); }
+}
+.orbit-bob { animation: orbit-bob 6s ease-in-out infinite; }
+.orbit-turn { animation: orbit-turn 48s linear infinite; transform-origin: 50% 50%; }
+
+/* A dashed ring that turns slowly the other way. */
+.orbit-turn-rev { animation: orbit-turn 90s linear infinite reverse; transform-origin: 50% 50%; }

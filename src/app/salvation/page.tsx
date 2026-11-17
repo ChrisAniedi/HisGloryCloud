@@ -10,9 +10,9 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <FormPage
-      eyebrow="Salvation"
-      lines={[{ text: "Welcome to a" }, { text: "new life in Christ.", em: true, className: "text-glory" }]}
-      body="Congratulations — this is the best decision you will ever make. Heaven is rejoicing, and so are we. You don’t have to walk this road alone."
+      kicker="Salvation"
+      title="Welcome to a new life in Christ"
+      intro="Congratulations. This is the best decision you will ever make. Heaven is rejoicing, and so are we. You don’t have to walk this road alone."
       formTitle="Tell us about you"
       formIntro="So someone from our follow-up team can reach out personally."
       aside={
