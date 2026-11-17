@@ -55,17 +55,17 @@ export function Header() {
           menu
             ? "bg-transparent text-white"
             : dark
-              ? "border-b border-white/10 bg-night/60 text-white shadow-[0_12px_32px_-22px_rgba(0,0,0,0.6)] backdrop-blur-2xl backdrop-saturate-150"
+              ? "border-b border-white/10 bg-[linear-gradient(180deg,rgba(20,16,13,0.42),rgba(20,16,13,0.22))] text-white shadow-[0_12px_32px_-22px_rgba(0,0,0,0.6)] backdrop-blur-[28px] backdrop-saturate-[1.8]"
               : cn(
-                  "border-b border-line/70 bg-[rgba(250,247,242,0.78)] text-ink backdrop-blur-2xl backdrop-saturate-150",
-                  moved && "shadow-[0_14px_36px_-24px_rgba(35,29,23,0.4)]"
+                  "border-b border-white/60 bg-[linear-gradient(180deg,rgba(255,253,250,0.55),rgba(255,253,250,0.32))] text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] backdrop-blur-[28px] backdrop-saturate-[1.9]",
+                  moved && "shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_14px_36px_-24px_rgba(35,29,23,0.35)]"
                 )
         )}
         animate={{ y: hidden && !menu && !step ? -96 : 0 }}
         transition={{ duration: 0.45, ease }}
       >
         <div className="container-x grid h-[84px] grid-cols-[1fr_auto] items-center gap-8 lg:grid-cols-[1fr_auto_1fr]">
-          <motion.nav aria-label="Main" className="-ml-3 hidden items-center gap-1 lg:flex" animate={{ opacity: menu ? 0 : 1 }} style={{ pointerEvents: menu ? "none" : "auto" }}>
+          <motion.nav aria-label="Main" className="-ml-3 hidden items-center gap-2 lg:flex xl:gap-4" animate={{ opacity: menu ? 0 : 1 }} style={{ pointerEvents: menu ? "none" : "auto" }}>
             {primaryNav.map((l) => (
               <Link
                 key={l.href + l.label}

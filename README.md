@@ -31,20 +31,20 @@ joincci.org, and Dribbble church/SaaS hero shots (framed hero card, big light di
   slowly turning dashed ring; the headline rises word by word and a hand-drawn line writes under "God’s glory."
   (`hero-headline.tsx`). The pastor circle is supported but switched off (`media.pastor` = null; owner,
   2026-11-17; file kept at public/media/pastor.jpg).
-- **Header** (`site/header.tsx`, owner asked for Serviceberry's arrangement): the church's own menu on the left
-  (About Us, Ministry Training, Outreach, Pastoral Services, as on hisglorycloudchurch.org), the logo centred, a red
-  "Next step" button that opens a side panel (`site/next-step-panel.tsx`, the four next steps in the church's words,
-  Sunday times, address, socials) and "Menu" (full-screen, `site/menu-overlay.tsx`). Clear at the top, frosted once
-  the page moves, dark over sections marked `data-nav="dark"`, tucks away while scrolling down.
+- **Header** (`site/header.tsx`): full width with the fluid page gutter (`--gutter`, like Serviceberry's), see-through
+  glass (light, or dark over `data-nav="dark"` sections). Links: About, Grow, Sermons, Give, Community; logo centred;
+  red "Next step" side panel (`site/next-step-panel.tsx`) and "Menu" (full screen, adds Help & support).
 - **WhatsApp button** (`site/whatsapp-float.tsx`): bottom right on every page, for prayer, counselling and help.
   Needs the church's WhatsApp number in `contact.whatsapp` (src/lib/site.ts); until then it opens /pastoral-care.
-- **Home sections**, in order: Hero; Interlude (ornament, Psalm 95:6, service times: the pause after the hero);
-  Welcome home (three tall photo cards that settle in on scroll, idea from
-  joincci.org); Our mission (dark band, the words light up as you scroll); Gather with us (bento with small pictures
-  built from real details); Latest messages; Ministries (Training, Pastoral Services, Outreach, each with a line
-  drawing that draws itself, `motion/line-art.tsx` + `lib/drawings.ts`); Vision (worship photo band with parallax);
-  Take the next step (big rows); Your first Sunday (three steps on a drawn line, reused on /visit); Plan your visit (times + map); Give (red band, soft card, line-art hands).
-  Sections share `SectionIntro` / `Chip` (`site/section-intro.tsx`). Rings stay in the hero only.
+- **Home sections**, in order: Hero; Worship with us (in person / livestream, `blocks/worship-with-us.tsx`, idea from
+  bhmglobal.org); Interlude (Psalm 95:6); Start here (About / Grow / Community photo cards); Our mission (words
+  light up on scroll); Fuel your faith (sermon row from YouTube, `blocks/sermon-rail.tsx`); Ministries (line art);
+  Vision (photo band); Take the next step; Your first Sunday; Give; FAQ (`blocks/faq.tsx`); Come worship with us
+  (closing band with a fan of photos, `blocks/closing-band.tsx`). Footer ends with the church's name fading out.
+- **Pages**: /about (hero with a dome of the places HGC plans to reach), /grow, /sermons (searchable grid of the
+  channel's messages, `blocks/sermon-library.tsx`), /give (giving as worship, account card, FAQ), /community (photos
+  on a string, values, units, socials, FAQ), /help (prayer, counselling, contact, FAQ), plus the earlier pages.
+  Several pages close with a large verse (`blocks/verse-block.tsx`). Sections share `SectionIntro` / `Chip`.
 - **Latest messages** come from the YouTube channel feed (`src/lib/youtube.ts`, cached for hours, shorts
   skipped, ALL CAPS titles put in sentence case, fallback list if YouTube is unreachable).
 - **Motion**: things fade and sharpen into place once (`components/motion/reveal.tsx`). Respects reduced-motion.

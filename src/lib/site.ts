@@ -269,12 +269,13 @@ export const nav = [
   { label: "Give", href: "/give" },
 ] as const;
 
-/** The church's own menu, as on hisglorycloudchurch.org. */
+/** The links in the top bar. */
 export const primaryNav = [
-  { label: "About Us", href: "/about" },
-  { label: "Ministry Training", href: "/training" },
-  { label: "Outreach", href: "/give" },
-  { label: "Pastoral Services", href: "/pastoral-care" },
+  { label: "About", href: "/about" },
+  { label: "Grow", href: "/grow" },
+  { label: "Sermons", href: "/sermons" },
+  { label: "Give", href: "/give" },
+  { label: "Community", href: "/community" },
 ] as const;
 
 /** The "Next step" panel, in the church's own words. */
@@ -316,3 +317,20 @@ export const stock = {
   choir: { src: "/media/stock/choir.jpg", alt: "Choir members in robes singing", credit: "SofirJaja01 · CC BY-SA 4.0", creditHref: commons("The Choir members.jpg"), position: "50% 35%" },
   drummers: { src: "/media/stock/drummers.jpg", alt: "Church musicians playing drums", credit: "Arch-Angel Raphael the Artist · CC BY-SA 4.0", creditHref: commons("Church Choir Band - Igbo Tribe - Nike - Enugu State - Nigeria - 01.jpg"), position: "50% 45%" },
 } satisfies Record<string, Photo>;
+
+/** Common questions, shown on the home, community and help pages. */
+export const generalFaqs = [
+  { q: "Can I join online?", a: "Yes. Every Sunday service streams live on our YouTube channel from 9am (WAT), and past messages are there too. You can follow us on Instagram and Facebook for news through the week." },
+  { q: "What kind of teaching can I expect?", a: "The Word of God, preached with fire and taught so you can live it: who you are in Christ, prayer, faith, purpose and leadership in God’s kingdom." },
+  { q: "How can I become part of the family?", a: "Come on a Sunday and let a greeter know it’s your first time. When you’re ready, join one of our serving units or the ministry training programme." },
+  { q: "How can I give?", a: "By bank transfer to Zenith Bank, His Glory Cloud Church, 1014394130, or in person during a service. Every gift supports the work of the gospel and our outreach." },
+  { q: "Who can I talk to if I need help?", a: "Send a prayer request, book a pastoral service for counselling, or message us. Someone from the pastoral team will get back to you." },
+] as const;
+
+/** Questions about giving. */
+export const giveFaqs = [
+  { q: "How is my gift used?", a: "Gifts keep the work of the church going and reach beyond it: outreach and evangelism, families in need, missions, and the care of the Glory Tent." },
+  { q: "Can I give from outside Nigeria?", a: "The account listed here is a Naira account. If you’d like to give from abroad, message us and we’ll share the best way to do it." },
+  { q: "Can I give towards something specific?", a: "Yes. Add a note to your transfer (for example “Tithe”, “Offering” or “Outreach”) or tell us when you message, and we’ll make sure it goes there." },
+  { q: "Can I give in person?", a: "Yes, during any Sunday or midweek service at the Glory Tent." },
+] as const;

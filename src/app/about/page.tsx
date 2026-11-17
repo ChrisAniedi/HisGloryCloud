@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { BookOpen, Globe2, HandHeart, Radio, Users } from "lucide-react";
-import { PageHero } from "@/components/site/page-hero";
+import { AboutHero } from "@/components/blocks/about-hero";
+import { ClosingBand } from "@/components/blocks/closing-band";
 import { SectionIntro, Chip } from "@/components/site/section-intro";
 import { Reveal } from "@/components/motion/reveal";
 import { LogoMark } from "@/components/site/logo";
-import { church, coreValues, media, scriptures, stock } from "@/lib/site";
+import { church, coreValues, media, scriptures } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About us",
@@ -19,12 +20,7 @@ const reach = ["Lagos", "Africa", "America", "Europe", "The ends of the earth"];
 export default function AboutPage() {
   return (
     <>
-      <PageHero
-        kicker="About us"
-        image={stock.churchInterior}
-        title="A people of His glory"
-        intro={`${church.name}, also called ${church.chapel}, exists to spread the gospel of our Lord Jesus around the world, with signs, wonders and the power of God as of old.`}
-      />
+      <AboutHero />
 
       {/* Story */}
       <section className="section-y">
@@ -127,6 +123,7 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+      <ClosingBand />
     </>
   );
 }

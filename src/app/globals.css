@@ -35,6 +35,8 @@
 
 /* shadcn semantic tokens (light is the only theme) */
 :root {
+  /* Page gutter: the space between content and the screen edge (fluid, like Serviceberry's). */
+  --gutter: clamp(1.25rem, 4vw, 4.5rem);
   --radius: 0.5rem;
   --background: var(--color-paper);
   --foreground: var(--color-ink);
@@ -114,11 +116,11 @@
   .container-x {
     margin-inline: auto;
     width: 100%;
-    max-width: 82rem;
-    padding-inline: clamp(1.25rem, 5vw, 4.5rem);
+    max-width: 1920px;
+    padding-inline: var(--gutter);
   }
   .section-y {
-    padding-block: clamp(4.5rem, 10vw, 8.5rem);
+    padding-block: clamp(5rem, 10vw, 9rem);
   }
   /* Small label above a heading: plain sentence case, the accent colour */
   .kicker {

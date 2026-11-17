@@ -13,11 +13,12 @@ import { cn } from "@/lib/utils";
 
 const main = [
   { label: "Home", href: "/" },
-  { label: "About us", href: "/about" },
-  { label: "Plan a visit", href: "/visit" },
-  { label: "Watch online", href: "/watch" },
-  { label: "Next steps", href: "/next-steps" },
+  { label: "About", href: "/about" },
+  { label: "Grow", href: "/grow" },
+  { label: "Sermons", href: "/sermons" },
   { label: "Give", href: "/give" },
+  { label: "Community", href: "/community" },
+  { label: "Help & support", href: "/help" },
 ];
 
 const steps = [
@@ -27,6 +28,7 @@ const steps = [
   { label: "Join the workforce", href: "/serve" },
   { label: "Ministry training", href: "/training" },
   { label: "Pastoral services", href: "/pastoral-care" },
+  { label: "Plan a visit", href: "/visit" },
 ];
 
 const ease = [0.16, 1, 0.3, 1] as const;
@@ -66,7 +68,7 @@ export function MenuOverlay({ open, onOpenChange }: { open: boolean; onOpenChang
                             <Link
                               href={m.href}
                               className={cn(
-                                "group flex items-center justify-between border-b border-white/10 py-3 text-[clamp(2rem,4.4vw,3.4rem)] leading-tight font-light tracking-[-0.04em] transition-colors",
+                                "group flex items-center justify-between border-b border-white/10 py-3 text-[clamp(1.9rem,3.9vw,3rem)] leading-tight font-light tracking-[-0.04em] transition-colors",
                                 pathname === m.href ? "text-cream" : "text-white hover:text-cream"
                               )}
                             >

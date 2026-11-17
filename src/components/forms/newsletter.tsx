@@ -7,7 +7,7 @@ import { initialFormState, type FormState } from "@/lib/forms/schemas";
 import { cn } from "@/lib/utils";
 
 /** Email sign-up, styled for the dark footer. */
-export function NewsletterForm({ className }: { className?: string }) {
+export function NewsletterForm({ className, stacked = false }: { className?: string; stacked?: boolean }) {
   const [state, action, pending] = useActionState<FormState, FormData>(submitForm.bind(null, "newsletter"), initialFormState);
   const done = state.status === "success";
 
@@ -25,7 +25,7 @@ export function NewsletterForm({ className }: { className?: string }) {
         <input type="text" name="company" tabIndex={-1} autoComplete="off" />
       </div>
       <label htmlFor="nl-email" className="sr-only">Email address</label>
-      <div className="flex flex-col gap-2 sm:flex-row">
+      <div className={cn("flex flex-col gap-2", !stacked && "sm:flex-row")}>
         <input
           id="nl-email"
           name="email"

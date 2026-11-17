@@ -40,18 +40,18 @@ function Card({ c, i }: { c: WelcomeCard; i: number }) {
   );
 }
 
-/** "Welcome home": three ways in, as tall photo cards that settle into place as you scroll. */
-export function Welcome({ cards }: { cards: WelcomeCard[] }) {
+/** "Start here": three ways in, as tall photo cards that settle into place as you scroll. */
+export function Welcome({ cards, chip = "Start here", title = "Find your place.", body = "Get to know the family, grow in the Word, and find people to walk with. Your journey of faith can begin, or begin again, right here." }: { cards: WelcomeCard[]; chip?: string; title?: string; body?: string }) {
   return (
-    <section className="pb-[clamp(4.5rem,10vw,8.5rem)]">
+    <section className="pb-[clamp(5rem,10vw,9rem)]">
       <div className="container-x">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <Reveal>
-            <Chip>Welcome to the Glory Tent</Chip>
-            <h2 className="mt-5 text-[clamp(3rem,7vw,5.5rem)] leading-[0.95] font-medium tracking-[-0.05em]">Welcome home.</h2>
+            <Chip>{chip}</Chip>
+            <h2 className="mt-5 text-[clamp(3rem,7vw,5.5rem)] leading-[0.95] font-medium tracking-[-0.05em]">{title}</h2>
           </Reveal>
           <Reveal delay={0.1} className="max-w-sm">
-            <p className="text-lg text-muted">Dive into the Word, our services and our community. Your journey of faith can begin, or begin again, right here.</p>
+            <p className="text-lg text-muted">{body}</p>
           </Reveal>
         </div>
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

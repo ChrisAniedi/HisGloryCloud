@@ -3,11 +3,10 @@
 import { motion, useReducedMotion } from "motion/react";
 import { RevealWords, Reveal } from "@/components/motion/reveal";
 import { LogoMark } from "@/components/site/logo";
-import { gatherings, church } from "@/lib/site";
 
 const ease = [0.65, 0, 0.35, 1] as const;
 
-/** A quiet pause after the hero: an ornament, a verse, and when we meet. */
+/** A quiet pause between sections: an ornament and a verse. */
 export function Interlude() {
   const reduce = useReducedMotion();
   const line = (origin: "left" | "right") => (
@@ -42,18 +41,6 @@ export function Interlude() {
             <footer className="mt-5 text-sm font-semibold tracking-[0.16em] text-red uppercase">Psalm 95:6</footer>
           </Reveal>
         </blockquote>
-        <Reveal delay={0.45}>
-          <p className="mt-10 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[0.95rem] text-muted">
-            {gatherings.map((g, i) => (
-              <span key={g.id} className="flex items-center gap-4">
-                {i > 0 && <span aria-hidden className="size-1 rounded-full bg-red/50" />}
-                <span><span className="font-medium text-ink">{g.short}s</span> {g.timeLabel}</span>
-              </span>
-            ))}
-            <span aria-hidden className="size-1 rounded-full bg-red/50" />
-            <span>{church.address.line2}</span>
-          </p>
-        </Reveal>
       </div>
     </section>
   );
