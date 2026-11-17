@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter_Tight, Source_Serif_4 } from "next/font/google";
+import localFont from "next/font/local";
 import { MotionProvider } from "@/components/motion/motion-provider";
 import { Header } from "@/components/site/header";
 import { Footer } from "@/components/site/footer";
@@ -8,13 +8,23 @@ import { Toaster } from "@/components/ui/sonner";
 import { church, gatherings, socials } from "@/lib/site";
 import "./globals.css";
 
-const sans = Inter_Tight({ variable: "--font-inter-tight", subsets: ["latin"], display: "swap" });
-const serif = Source_Serif_4({
-  variable: "--font-source-serif",
-  subsets: ["latin"],
-  axes: ["opsz"],
-  style: ["italic"],
+// Fonts are served from the project (src/app/fonts, OFL licensed) rather than fetched from Google
+// at build time, so a slow or blocked connection can never break the site.
+const sans = localFont({
+  variable: "--font-inter-tight",
   display: "swap",
+  weight: "100 900",
+  src: [
+    { path: "./fonts/inter-tight-latin-wght-normal.woff2", style: "normal" },
+  ],
+});
+const serif = localFont({
+  variable: "--font-source-serif",
+  display: "swap",
+  weight: "200 900",
+  src: [
+    { path: "./fonts/source-serif-4-latin-wght-italic.woff2", style: "italic" },
+  ],
 });
 
 export const metadata: Metadata = {
