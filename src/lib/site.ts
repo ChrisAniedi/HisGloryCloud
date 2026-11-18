@@ -295,7 +295,8 @@ export const media = {
   worship: "/media/worship-hands.jpg" as string | null,
   prayer: "/media/in-prayer.jpg" as string | null,
   thanksgiving: "/media/thanksgiving.jpg" as string | null,
-  leader: null as string | null, // e.g. "/media/apostle.jpg" (a proper portrait for the About page)
+  // About → Leadership. Cropped from a frame of his YouTube message T7hz513l3Wo (384×480); swap for a real portrait.
+  leader: "/media/pastor-portrait.jpg" as string | null,
   // Small circular portrait, cropped from a frame of one of his YouTube messages. Fine at avatar size only.
   // Not shown for now (owner, 2026-11-17). To bring it back: "/media/pastor.jpg" (file kept).
   pastor: null as string | null,

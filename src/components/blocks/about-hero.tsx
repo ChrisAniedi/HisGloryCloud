@@ -5,6 +5,7 @@ import { motion, useAnimationFrame, useMotionValue, useReducedMotion, useTransfo
 import { Globe2, HeartHandshake, Sparkles } from "lucide-react";
 import { Chip } from "@/components/site/section-intro";
 import { media } from "@/lib/site";
+import { HeroBackdrop } from "@/components/motion/hero-backdrop";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 const W = 1000;
@@ -76,12 +77,12 @@ function Globe() {
   );
 }
 
-/** About opener: dark, a big line, three tags, and a turning globe with the places HGC plans to reach. */
+/** About opener: full-bleed and dark under the nav, a faded grid, a big line, three tags, and a turning globe with the places HGC plans to reach. */
 export function AboutHero() {
   return (
-    <section data-nav="dark" className="px-2 pt-2 md:px-3 md:pt-3">
-      <div className="relative overflow-hidden rounded-[24px] bg-night pt-32 text-white md:rounded-[28px] md:pt-40">
-        <div aria-hidden className="pointer-events-none absolute -top-40 left-1/2 h-[36rem] w-[64rem] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(240,106,91,0.2),transparent)]" />
+    <section data-nav="dark" className="relative isolate overflow-hidden bg-night pt-36 text-white md:pt-44">
+      <HeroBackdrop dark />
+      <div>
         <div className="container-x relative text-center">
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease }}>
             <Chip onDark>About us</Chip>

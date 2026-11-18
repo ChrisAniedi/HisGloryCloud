@@ -9,7 +9,7 @@ import { NextStepsList } from "@/components/sections/next-steps-list";
 import { FirstSunday } from "@/components/sections/first-sunday";
 import { Give } from "@/components/sections/give";
 import { Faq } from "@/components/blocks/faq";
-import { church, generalFaqs, media } from "@/lib/site";
+import { church, generalFaqs, media, stock } from "@/lib/site";
 
 export default function HomePage() {
   const cards = [
@@ -46,6 +46,18 @@ export default function HomePage() {
       image: media.worship,
       position: "50% 22%",
     },
+    {
+      label: "Grow with us",
+      title: "Find your gift",
+      body: "Ministry Training, midweek service and a place on the workforce. Grow, then serve.",
+      badge: "Ministry Training",
+      info: "Training · Workforce · Midweek",
+      cta: "Start growing",
+      href: "/grow",
+      image: stock.choir.src,
+      position: stock.choir.position,
+      credit: stock.choir.credit,
+    },
   ].filter(Boolean) as WelcomeCard[];
 
   return (
@@ -58,7 +70,7 @@ export default function HomePage() {
       <Ministries />
       <Vision />
       <NextStepsList />
-      <FirstSunday />
+      <FirstSunday className="pb-[clamp(3.25rem,6vw,5.25rem)]" />
       <Give />
       <Faq items={generalFaqs} />
     </>

@@ -66,7 +66,7 @@ export default function HelpPage() {
         </div>
       </section>
 
-      <section id="reach-us" className="pb-[clamp(5rem,10vw,9rem)]">
+      <section id="reach-us" className="pb-[clamp(3.25rem,6vw,5.25rem)]">
         <div className="container-x">
           <Reveal>
             <div className="grid gap-10 rounded-[28px] bg-night p-8 text-white md:p-12 lg:grid-cols-3">

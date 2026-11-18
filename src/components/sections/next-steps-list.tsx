@@ -7,7 +7,7 @@ import { nextStepLinks } from "@/lib/site";
 /** "Take the next step", in the church's own words, as a list of big rows. */
 export function NextStepsList() {
   return (
-    <section className="section-y">
+    <section className="pb-[clamp(3.25rem,6vw,5.25rem)]">
       <div className="container-x grid gap-10 lg:grid-cols-12 lg:gap-16">
         <Reveal className="lg:col-span-5">
           <div className="lg:sticky lg:top-32">

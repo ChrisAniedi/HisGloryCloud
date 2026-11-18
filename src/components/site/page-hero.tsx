@@ -7,6 +7,7 @@ import { useRef } from "react";
 import { ChevronRight } from "lucide-react";
 import { Chip } from "./section-intro";
 import { LogoMark } from "./logo";
+import { HeroBackdrop } from "@/components/motion/hero-backdrop";
 import type { Photo } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
@@ -39,8 +40,8 @@ export function PageHero({
   const y = useTransform(scrollYProgress, [0, 1], reduce ? ["0%", "0%"] : ["0%", "10%"]);
 
   return (
-    <section ref={ref} className={cn("relative overflow-hidden border-b border-line pt-32 pb-14 md:pt-40 md:pb-20", className)}>
-      <div aria-hidden className="pointer-events-none absolute -top-40 left-1/2 -z-10 h-[34rem] w-[60rem] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(240,165,150,0.22),transparent)]" />
+    <section ref={ref} className={cn("relative isolate overflow-hidden border-b border-line pt-32 pb-12 md:pt-40 md:pb-16", className)}>
+      <HeroBackdrop />
       <div className={cn("container-x grid gap-12", image && "lg:grid-cols-12 lg:items-center lg:gap-16")}>
         <motion.div
           className={cn(image ? "lg:col-span-6" : "mx-auto max-w-3xl text-center")}

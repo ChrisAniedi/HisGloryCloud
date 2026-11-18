@@ -60,7 +60,7 @@ export default function AboutPage() {
 
       {/* Mission & vision */}
       <section data-nav="dark" className="px-2 md:px-3">
-        <div className="rounded-[24px] bg-night py-[clamp(4rem,9vw,7rem)] text-white md:rounded-[28px]">
+        <div className="rounded-[24px] bg-night py-[clamp(3.5rem,7vw,5.5rem)] text-white md:rounded-[28px]">
           <div className="container-x grid gap-4 md:grid-cols-2">
             <Reveal className="flex h-full flex-col rounded-[24px] bg-white/[0.05] p-8 ring-1 ring-white/10 md:p-10">
               <Chip onDark>Our mission</Chip>
@@ -86,22 +86,34 @@ export default function AboutPage() {
       <section className="section-y">
         <div className="container-x">
           <Reveal>
-            <div className="mx-auto max-w-4xl rounded-[28px] bg-white p-8 text-center ring-1 ring-line md:p-14">
-              <Chip>Leadership</Chip>
-              <h2 className="heading-2 mt-5">{church.leader.name}</h2>
-              <p className="mt-2 font-medium text-red">{church.leader.role} · “{church.leader.title}”</p>
-              <p className="mx-auto mt-6 max-w-2xl text-lg text-muted">
-                God has raised His servant, Apostle Festus Nwachukwu Edobor, to raise you, furnish you, bring out the hidden
-                virtues in you and make a glorious destiny out of you. Under his leadership, HGC continues to spread the gospel
-                through worship, the Word, media, outreach and philanthropy.
-              </p>
+            <div className="mx-auto grid max-w-5xl items-center gap-8 overflow-hidden rounded-[28px] bg-white p-3 ring-1 ring-line md:grid-cols-[minmax(0,20rem)_1fr] md:gap-12 md:pr-12">
+              {media.leader && (
+                <div className="relative aspect-[4/5] overflow-hidden rounded-[22px] bg-sand">
+                  <Image src={media.leader} alt={church.leader.name} fill sizes="(min-width:768px) 20rem, 100vw" className="object-cover object-[50%_20%]" />
+                  <span className="absolute inset-x-0 bottom-0 h-1/3 bg-[linear-gradient(transparent,rgba(20,16,13,0.55))]" />
+                  <span className="absolute bottom-3 left-3 inline-flex items-center gap-2 rounded-full bg-white/90 py-1 pr-3 pl-1 text-xs font-semibold text-ink backdrop-blur">
+                    <span className="grid size-6 place-items-center rounded-full bg-paper"><LogoMark className="h-4" /></span>
+                    {church.leader.role}
+                  </span>
+                </div>
+              )}
+              <div className={media.leader ? "px-4 pb-6 md:px-0 md:py-8" : "p-8 text-center md:p-14"}>
+                <Chip>Leadership</Chip>
+                <h2 className="heading-2 mt-5">{church.leader.name}</h2>
+                <p className="mt-2 font-medium text-red">{church.leader.role} · “{church.leader.title}”</p>
+                <p className="mt-6 max-w-2xl text-lg text-muted">
+                  God has raised His servant, Apostle Festus Nwachukwu Edobor, to raise you, furnish you, bring out the hidden
+                  virtues in you and make a glorious destiny out of you. Under his leadership, HGC continues to spread the gospel
+                  through worship, the Word, media, outreach and philanthropy.
+                </p>
+              </div>
             </div>
           </Reveal>
         </div>
       </section>
 
       {/* Core values */}
-      <section className="pb-[clamp(4.5rem,10vw,8.5rem)]">
+      <section className="pb-[clamp(3.25rem,6vw,5.25rem)]">
         <div className="container-x">
           <SectionIntro chip="Core values" title="What our hands are given to" />
           <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">

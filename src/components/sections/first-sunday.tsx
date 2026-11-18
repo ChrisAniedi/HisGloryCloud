@@ -13,10 +13,10 @@ const steps = [
 ];
 
 /** What a first Sunday is like, as three steps along a line that draws itself. */
-export function FirstSunday({ cta = true }: { cta?: boolean }) {
+export function FirstSunday({ cta = true, className = "section-y" }: { cta?: boolean; className?: string }) {
   const reduce = useReducedMotion();
   return (
-    <section className="section-y">
+    <section className={className}>
       <div className="container-x">
         <SectionIntro chip="Your first Sunday" title="Never been before? Here’s what to expect" body="No dress code, nothing to sign up for. Just come, and we’ll take care of the rest." />
 

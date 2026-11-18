@@ -121,7 +121,7 @@
     padding-inline: var(--gutter);
   }
   .section-y {
-    padding-block: clamp(4rem, 8vw, 7rem);
+    padding-block: clamp(3.25rem, 6vw, 5.25rem);
   }
   /* Small label above a heading: plain sentence case, the accent colour */
   .kicker {
@@ -190,3 +190,10 @@
 
 /* A dashed ring that turns slowly the other way. */
 .orbit-turn-rev { animation: orbit-turn 90s linear infinite reverse; transform-origin: 50% 50%; }
+
+/* Footer name: two identical halves, so sliding by half loops seamlessly */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}

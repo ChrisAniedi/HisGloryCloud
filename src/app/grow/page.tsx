@@ -88,7 +88,7 @@ export default function GrowPage() {
       </section>
 
       {/* Register */}
-      <section id="register" className="scroll-mt-28 pb-[clamp(4rem,8vw,7rem)]">
+      <section id="register" className="scroll-mt-28 pb-[clamp(3.25rem,6vw,5.25rem)]">
         <div className="container-x grid gap-10 lg:grid-cols-12 lg:gap-14">
           <Reveal className="lg:col-span-5">
             <Chip>Register</Chip>
@@ -106,7 +106,7 @@ export default function GrowPage() {
       <Faq items={trainingFaqs} title="About the programme" chip="Questions" className="pt-0" />
 
       {/* More ways to grow */}
-      <section className="pb-[clamp(4rem,8vw,7rem)]">
+      <section className="pb-[clamp(3.25rem,6vw,5.25rem)]">
         <div className="container-x">
           <SectionIntro chip="More ways to grow" title="Go deeper, one step at a time" />
           <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">

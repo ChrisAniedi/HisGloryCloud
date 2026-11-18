@@ -66,19 +66,19 @@ export function Header() {
         transition={{ duration: 0.45, ease }}
       >
         <div className="container-x grid h-[84px] grid-cols-[1fr_auto] items-center gap-8 lg:grid-cols-[1fr_auto_1fr]">
-          <motion.nav aria-label="Main" className="-ml-3 hidden items-center gap-2 lg:flex xl:gap-4" animate={{ opacity: menu ? 0 : 1 }} style={{ pointerEvents: menu ? "none" : "auto" }}>
+          <motion.nav aria-label="Main" className="-ml-2.5 hidden items-center gap-0 lg:flex xl:gap-1" animate={{ opacity: menu ? 0 : 1 }} style={{ pointerEvents: menu ? "none" : "auto" }}>
             {primaryNav.map((l) => (
               <Link
                 key={l.href + l.label}
                 href={l.href}
                 aria-current={active(l.href) ? "page" : undefined}
                 className={cn(
-                  "relative flex h-[84px] items-center px-3 text-[0.95rem] font-medium whitespace-nowrap transition-colors",
+                  "relative flex h-[84px] items-center px-2.5 text-[0.95rem] font-medium whitespace-nowrap transition-colors",
                   active(l.href) ? (dark ? "text-cream" : "text-red") : dark ? "text-white/85 hover:text-white" : "text-ink-soft hover:text-ink"
                 )}
               >
                 {l.label}
-                {active(l.href) && <span className="absolute inset-x-3 bottom-0 h-[3px] rounded-t-full bg-current" />}
+                {active(l.href) && <span className="absolute inset-x-2.5 bottom-0 h-[3px] rounded-t-full bg-current" />}
               </Link>
             ))}
           </motion.nav>

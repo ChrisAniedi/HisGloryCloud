@@ -96,13 +96,23 @@ export function Footer() {
           </p>
         </div>
 
-        {/* the church's name, fading away */}
-        <p
-          aria-hidden
-          className="pointer-events-none -mt-[1vw] -mb-[4.2vw] bg-[linear-gradient(180deg,rgba(243,233,215,0.16)_0%,rgba(243,233,215,0.07)_45%,transparent_85%)] bg-clip-text text-center text-[15.5vw] leading-[1] font-semibold tracking-[-0.065em] whitespace-nowrap text-transparent select-none"
-        >
-          His Glory Cloud
-        </p>
+        {/* the church's name, stretched across and drifting slowly, fading away */}
+        <div aria-hidden className="pointer-events-none mt-4 -mb-[3vw] overflow-hidden select-none">
+          <div className="flex w-max animate-[marquee_38s_linear_infinite] motion-reduce:animate-none">
+            {[0, 1].map((k) => (
+              <span key={k} className="flex shrink-0 items-center">
+                {["His Glory Cloud", "His Glory Cloud"].map((t, i) => (
+                  <span key={i} className="flex items-center">
+                    <span className="bg-[linear-gradient(180deg,rgba(243,233,215,0.2)_0%,rgba(243,233,215,0.09)_50%,transparent_92%)] bg-clip-text pr-[4vw] font-display text-[19vw] leading-[1] tracking-[-0.02em] whitespace-nowrap text-transparent">
+                      {t}
+                    </span>
+                    <span className="mr-[4vw] size-[3vw] rounded-full bg-[radial-gradient(circle,rgba(240,106,91,0.35),transparent_70%)]" />
+                  </span>
+                ))}
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
     </footer>
   );

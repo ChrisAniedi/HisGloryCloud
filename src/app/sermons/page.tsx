@@ -1,3 +1,4 @@
+import { HeroBackdrop } from "@/components/motion/hero-backdrop";
 import type { Metadata } from "next";
 import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
@@ -26,8 +27,8 @@ export default async function SermonsPage() {
   const items = await getLatestMessages(15);
   return (
     <>
-      <section className="relative overflow-hidden pt-32 pb-[clamp(5rem,10vw,9rem)] md:pt-40">
-        <div aria-hidden className="pointer-events-none absolute -top-40 left-1/2 -z-10 h-[36rem] w-[64rem] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(240,165,150,0.25),transparent)]" />
+      <section className="relative isolate overflow-hidden pt-32 pb-[clamp(3.25rem,6vw,5.25rem)] md:pt-40">
+        <HeroBackdrop />
         <div className="container-x">
           <Reveal className="text-center">
             <Chip>Sermons</Chip>
@@ -42,7 +43,7 @@ export default async function SermonsPage() {
         </div>
       </section>
 
-      <section className="pb-[clamp(5rem,10vw,9rem)]">
+      <section className="pb-[clamp(3.25rem,6vw,5.25rem)]">
         <div className="container-x">
           <SectionIntro chip="Watch anywhere" title="Listen anywhere. Any time." body="Follow along through the week, wherever you are." />
           <div className="mt-12 grid gap-4 md:grid-cols-3">

@@ -1,3 +1,4 @@
+import { HeroBackdrop } from "@/components/motion/hero-backdrop";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight, BookOpen, HandHeart, Megaphone } from "lucide-react";
@@ -38,8 +39,8 @@ export default function CommunityPage() {
 
   return (
     <>
-      <section className="relative overflow-hidden pt-32 md:pt-40">
-        <div aria-hidden className="pointer-events-none absolute -top-40 left-1/2 -z-10 h-[36rem] w-[64rem] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(240,165,150,0.25),transparent)]" />
+      <section className="relative isolate overflow-hidden pt-32 md:pt-40">
+        <HeroBackdrop />
         <div className="container-x text-center">
           <Reveal>
             <Chip>Community</Chip>
@@ -76,7 +77,7 @@ export default function CommunityPage() {
       </section>
 
       <section data-nav="dark" className="px-2 md:px-3">
-        <div className="rounded-[24px] bg-night py-[clamp(4.5rem,9vw,7rem)] text-white md:rounded-[28px]">
+        <div className="rounded-[24px] bg-night py-[clamp(3.5rem,7vw,5.5rem)] text-white md:rounded-[28px]">
           <div className="container-x grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-16">
             <Reveal className="lg:col-span-5">
               <Chip onDark>Serve together</Chip>
