@@ -15,7 +15,7 @@ const cells = [
  */
 export function HeroBackdrop({ dark = false, panel = false, className }: { dark?: boolean; panel?: boolean; className?: string }) {
   const reduce = useReducedMotion();
-  const line = dark ? "rgba(243,233,215,0.05)" : panel ? "rgba(35,29,23,0.06)" : "rgba(35,29,23,0.04)";
+  const line = dark ? "rgba(243,233,215,0.05)" : panel ? "rgba(35,29,23,0.035)" : "rgba(35,29,23,0.04)";
   const cell = panel ? 48 : 64;
   return (
     <div aria-hidden className={cn("pointer-events-none absolute inset-0 -z-10 overflow-hidden", className)}>
@@ -30,7 +30,7 @@ export function HeroBackdrop({ dark = false, panel = false, className }: { dark?
       />}
       {/* the grid, faded out towards the edges and the bottom */}
       <div
-        className={cn("absolute inset-0", panel ? "[mask-image:radial-gradient(ellipse_85%_90%_at_60%_50%,#000_35%,transparent_95%)]" : "[mask-image:radial-gradient(ellipse_70%_75%_at_50%_20%,#000_25%,transparent_80%)]")}
+        className={cn("absolute inset-0", panel ? "[mask-image:radial-gradient(ellipse_70%_80%_at_70%_40%,#000_10%,transparent_85%)]" : "[mask-image:radial-gradient(ellipse_70%_75%_at_50%_20%,#000_25%,transparent_80%)]")}
         style={{
           backgroundImage: `linear-gradient(${line} 1px, transparent 1px), linear-gradient(90deg, ${line} 1px, transparent 1px)`,
           backgroundSize: `${cell}px ${cell}px`,
@@ -42,7 +42,7 @@ export function HeroBackdrop({ dark = false, panel = false, className }: { dark?
             {cells.map(([c, r], i) => (
               <motion.span
                 key={i}
-                className={cn("absolute", dark ? "bg-cream/[0.05]" : panel ? "bg-red/[0.07]" : "bg-red/[0.045]")}
+                className={cn("absolute", dark ? "bg-cream/[0.05]" : panel ? "bg-red/[0.04]" : "bg-red/[0.045]")}
                 style={{ width: cell - 1, height: cell - 1, left: `calc(50% + ${(c - 10) * cell - cell / 2 + 1}px)`, top: r * cell + 1 }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: [0, 1, 0] }}

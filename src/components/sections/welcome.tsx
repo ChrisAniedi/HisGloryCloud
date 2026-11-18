@@ -37,27 +37,26 @@ function Card({ c, i, n, progress }: { c: WelcomeCard; i: number; n: number; pro
       <motion.div className="absolute inset-0 -z-10" style={{ scale }}>
         <Image src={c.image} alt="" fill sizes="(min-width:1024px) 28vw, 82vw" className="object-cover transition-transform duration-[1.2s] ease-[var(--ease-out-soft)] group-hover:scale-[1.06]" style={{ objectPosition: c.position }} />
       </motion.div>
-      <span className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(20,16,13,0.45)_0%,rgba(20,16,13,0.1)_45%,rgba(20,16,13,0.15)_70%,rgba(20,16,13,0.6)_100%)]" />
+      <span className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(20,16,13,0.35)_0%,transparent_22%,transparent_45%,rgba(20,16,13,0.35)_68%,rgba(20,16,13,0.75)_100%)]" />
 
-      {/* the glass panel the words sit on: clear enough to see the photo through, with a bright frosted edge */}
-      <div className="relative overflow-hidden rounded-[18px] border border-white/35 bg-[linear-gradient(135deg,rgba(255,255,255,0.2)_0%,rgba(255,255,255,0.06)_55%,rgba(255,255,255,0.12)_100%)] p-4 pb-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.45),inset_0_-1px_0_rgba(255,255,255,0.1),0_18px_40px_-22px_rgba(0,0,0,0.55)] backdrop-blur-[6px] backdrop-saturate-[1.6]">
-        <span aria-hidden className="pointer-events-none absolute -top-1/2 -left-1/4 h-full w-2/3 rotate-12 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.18),transparent)] transition-transform duration-[1.2s] ease-[var(--ease-out-soft)] group-hover:translate-x-[180%]" />
-        <div className="relative flex items-center justify-between gap-3">
-          <span className="text-xs font-semibold tracking-[0.14em] text-white/80 tabular-nums">
-            {String(i + 1).padStart(2, "0")} / {String(n).padStart(2, "0")}
-            <span className="ml-2 font-medium tracking-[0.12em] text-white/65 uppercase">{c.label}</span>
-          </span>
-          <span className="grid size-9 shrink-0 place-items-center rounded-full bg-white text-ink transition-[transform,background-color,color] duration-500 group-hover:rotate-45 group-hover:bg-red group-hover:text-white">
-            <ArrowUpRight className="size-4" />
-          </span>
-        </div>
-        <h3 className="relative mt-2 font-display text-[clamp(1.6rem,2.2vw,2rem)] leading-none [text-shadow:0_2px_14px_rgba(0,0,0,0.35)]">{c.title}</h3>
-        <p className="relative mt-2.5 max-w-[22rem] text-[0.95rem] leading-relaxed text-white/90 [text-shadow:0_1px_10px_rgba(0,0,0,0.35)]">{c.body}</p>
+      <div className="flex items-start justify-between gap-3 p-1.5">
+        <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-semibold ring-1 ring-white/25 backdrop-blur-md">{c.badge}</span>
+        <span className="grid size-10 shrink-0 place-items-center rounded-full bg-white text-ink transition-[transform,background-color,color] duration-500 group-hover:rotate-45 group-hover:bg-red group-hover:text-white">
+          <ArrowUpRight className="size-4" />
+        </span>
       </div>
 
-      <div className="space-y-2.5">
-        <span className="ml-1 inline-flex rounded-full bg-white/15 px-3 py-1 text-xs font-semibold ring-1 ring-white/30 backdrop-blur-md">{c.badge}</span>
-        <span className="flex items-center gap-3 rounded-full bg-white p-1.5 pl-5 text-sm text-ink shadow-lg transition-transform duration-500 group-hover:-translate-y-1">
+      <div>
+        {/* glass that fades into the photo (see .glass-fade), low on the card so faces stay clear */}
+        <div className="glass-fade text-lift rounded-[18px] p-4 transition-transform duration-500 group-hover:-translate-y-1">
+          <span className="text-xs font-semibold tracking-[0.14em] text-white/80 tabular-nums">
+            {String(i + 1).padStart(2, "0")} / {String(n).padStart(2, "0")}
+            <span className="ml-2 font-medium tracking-[0.12em] text-white/70 uppercase">{c.label}</span>
+          </span>
+          <h3 className="mt-1.5 font-display text-[clamp(1.6rem,2.2vw,2rem)] leading-none">{c.title}</h3>
+          <p className="mt-2 max-w-[22rem] text-[0.95rem] leading-relaxed text-white/90">{c.body}</p>
+        </div>
+        <span className="mt-3 flex items-center gap-3 rounded-full bg-white p-1.5 pl-5 text-sm text-ink shadow-lg">
           <span className="min-w-0 flex-1 truncate text-muted">{c.info}</span>
           <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-night px-4 py-2 font-semibold text-white transition-colors group-hover:bg-red">
             {c.cta} <ArrowUpRight className="size-4 transition-transform group-hover:rotate-45" />
