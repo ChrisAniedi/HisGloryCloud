@@ -15,7 +15,7 @@ export function Vision() {
   const y = useTransform(scrollYProgress, [0, 1], reduce ? ["0%", "0%"] : ["-10%", "10%"]);
 
   return (
-    <section ref={ref} className="pb-[clamp(3.25rem,6vw,5.25rem)]">
+    <section ref={ref} className="pb-[var(--section-gap)]">
       <div className="container-x">
         <div data-nav="dark" className="grid overflow-hidden rounded-[28px] bg-red text-white lg:grid-cols-12">
           <div className="relative p-7 md:p-12 lg:col-span-7 lg:py-14">

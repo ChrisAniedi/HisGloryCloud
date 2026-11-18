@@ -13,7 +13,7 @@ export async function Messages() {
   const items = await getLatestMessages(8);
   if (!items.length) return null;
   return (
-    <section className="overflow-hidden pt-[clamp(1rem,3vw,2rem)] pb-[clamp(1.5rem,3vw,2.5rem)]">
+    <section className="overflow-hidden pt-[clamp(1rem,2vw,1.5rem)] pb-[clamp(2.5rem,4.5vw,3.75rem)]">
       <div className="container-x flex flex-col justify-between gap-6 md:flex-row md:items-end">
         <Reveal className="max-w-2xl">
           <Chip>Sermons</Chip>

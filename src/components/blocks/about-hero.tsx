@@ -80,31 +80,31 @@ function Globe() {
 /** About opener: full-bleed and dark under the nav, a faded grid, a big line, three tags, and a turning globe with the places HGC plans to reach. */
 export function AboutHero() {
   return (
-    <section data-nav="dark" className="relative isolate overflow-hidden bg-night pt-36 text-white md:pt-44">
+    <section data-nav="dark" className="relative isolate overflow-hidden bg-night pt-32 text-white md:pt-36">
       <HeroBackdrop dark />
       <div>
         <div className="container-x relative text-center">
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease }}>
             <Chip onDark>About us</Chip>
           </motion.div>
-          <h1 className="mx-auto mt-6 max-w-5xl font-display text-[clamp(2.8rem,6.6vw,5.75rem)] leading-[0.98] tracking-[-0.015em]">
-            {["One family.", "Every nation.", "His glory."].map((l, i) => (
-              <motion.span key={l} className={`block ${i === 2 ? "text-glow" : ""}`} initial={{ opacity: 0, y: 30, filter: "blur(8px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ duration: 1, delay: 0.15 + i * 0.12, ease }}>
+          <h1 className="mx-auto mt-5 max-w-6xl font-display text-[clamp(2.4rem,5.4vw,4.75rem)] leading-[1] tracking-[-0.015em]">
+            {["One family, every nation.", "His glory."].map((l, i) => (
+              <motion.span key={l} className={`block ${i === 1 ? "text-glow" : ""}`} initial={{ opacity: 0, y: 30, filter: "blur(8px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ duration: 1, delay: 0.15 + i * 0.12, ease }}>
                 {l}
               </motion.span>
             ))}
           </h1>
-          <motion.p className="mx-auto mt-6 max-w-2xl text-lg text-white/70 md:text-xl" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.6 }}>
+          <motion.p className="mx-auto mt-5 max-w-2xl text-lg text-white/70" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.6 }}>
             Spreading the gospel of our Lord Jesus around the world, with signs, wonders and the power of God as of old, from the Glory Tent in Lagos.
           </motion.p>
-          <motion.ul className="mt-6 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-medium text-white/80" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.75 }}>
+          <motion.ul className="mt-5 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-medium text-white/80" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.75 }}>
             <li className="flex items-center gap-1.5"><Sparkles className="size-4 text-glow" /> Since 2013</li>
             <li className="flex items-center gap-1.5"><HeartHandshake className="size-4 text-glow" /> One family</li>
             <li className="flex items-center gap-1.5"><Globe2 className="size-4 text-glow" /> To all nations</li>
           </motion.ul>
         </div>
 
-        <motion.div className="relative mx-auto mt-12 aspect-[1000/470] w-[min(1100px,calc(100%-2*var(--gutter)))]" initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 1.4, delay: 0.3, ease }}>
+        <motion.div className="relative mx-auto mt-8 aspect-[1000/470] w-[min(1000px,calc(100%-2*var(--gutter)))]" initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 1.4, delay: 0.3, ease }}>
           <Globe />
           {pins.map((p, i) => (
             <motion.div

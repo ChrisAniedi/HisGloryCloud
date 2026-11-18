@@ -60,7 +60,7 @@ export default function AboutPage() {
 
       {/* Mission & vision */}
       <section data-nav="dark" className="px-2 md:px-3">
-        <div className="rounded-[24px] bg-night py-[clamp(3.5rem,7vw,5.5rem)] text-white md:rounded-[28px]">
+        <div className="rounded-[24px] bg-night py-[clamp(4rem,8vw,6rem)] text-white md:rounded-[28px]">
           <div className="container-x grid gap-4 md:grid-cols-2">
             <Reveal className="flex h-full flex-col rounded-[24px] bg-white/[0.05] p-8 ring-1 ring-white/10 md:p-10">
               <Chip onDark>Our mission</Chip>
@@ -113,7 +113,7 @@ export default function AboutPage() {
       </section>
 
       {/* Core values */}
-      <section className="pb-[clamp(3.25rem,6vw,5.25rem)]">
+      <section className="pb-[var(--section-gap)]">
         <div className="container-x">
           <SectionIntro chip="Core values" title="What our hands are given to" />
           <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">

@@ -24,7 +24,7 @@ export default function GivePage() {
         <div className="container-x text-center">
           <Reveal>
             <Chip>Give & outreach</Chip>
-            <h1 className="mx-auto mt-6 max-w-4xl text-[clamp(3rem,7vw,6.25rem)] leading-[0.95] font-display tracking-[-0.015em]">
+            <h1 className="mx-auto mt-6 max-w-6xl text-[clamp(2.6rem,5.4vw,4.75rem)] leading-[1] font-display tracking-[-0.015em]">
               Giving as <span className="text-red">worship.</span>
             </h1>
             <p className="mx-auto mt-6 max-w-xl text-lg text-muted md:text-xl">Your generosity is an act of worship to God, and a powerful way to take the love of Christ beyond the four walls of the church.</p>
@@ -94,7 +94,7 @@ export default function GivePage() {
       </section>
 
       <section data-nav="dark" className="px-2 md:px-3">
-        <div className="rounded-[24px] bg-red py-[clamp(3.5rem,7vw,5.5rem)] text-white md:rounded-[28px]">
+        <div className="rounded-[24px] bg-red py-[clamp(4rem,8vw,6rem)] text-white md:rounded-[28px]">
           <div className="container-x grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-16">
             <Reveal className="lg:col-span-5">
               <Chip onDark>Your giving is changing lives</Chip>

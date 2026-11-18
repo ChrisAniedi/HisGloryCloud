@@ -70,7 +70,7 @@ export default function HomePage() {
       <Ministries />
       <Vision />
       <NextStepsList />
-      <FirstSunday className="pb-[clamp(3.25rem,6vw,5.25rem)]" />
+      <FirstSunday className="pb-[var(--section-gap)]" />
       <Give />
       <Faq items={generalFaqs} />
     </>

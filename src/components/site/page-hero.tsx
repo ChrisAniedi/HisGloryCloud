@@ -55,7 +55,7 @@ export function PageHero({
             <span aria-current="page">{crumb ?? kicker}</span>
           </nav>
           <Chip>{kicker}</Chip>
-          <h1 className="mt-5 text-[clamp(2.6rem,5.6vw,4.75rem)] leading-[1] font-display tracking-[-0.015em]">{title}</h1>
+          <h1 className="mt-5 text-[clamp(2.3rem,4.1vw,3.6rem)] leading-[1.02] font-display tracking-[-0.015em]">{title}</h1>
           {intro && <div className={cn("mt-6 max-w-xl text-lg text-muted md:text-xl", !image && "mx-auto")}>{intro}</div>}
           {children && <div className="mt-8">{children}</div>}
         </motion.div>

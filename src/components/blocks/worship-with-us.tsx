@@ -3,6 +3,7 @@
 import { ArrowUpRight, CalendarDays, Clock, Navigation } from "lucide-react";
 import { Reveal, RevealWords } from "@/components/motion/reveal";
 import { Tilt } from "@/components/motion/tilt";
+import { HeroBackdrop } from "@/components/motion/hero-backdrop";
 import { Chip } from "@/components/site/section-intro";
 import { LogoMark } from "@/components/site/logo";
 import { FacebookIcon, YouTubeIcon } from "@/components/site/social-icons";
@@ -38,7 +39,7 @@ export function WorshipWithUs() {
   const midweek = gatherings.find((g) => g.id === "midweek") ?? gatherings[1];
 
   return (
-    <section className="pt-[clamp(3.25rem,6vw,5.25rem)] pb-[clamp(1rem,2vw,2rem)]">
+    <section className="pt-[var(--section-gap)] pb-[clamp(1.5rem,3vw,2.5rem)]">
       <div className="container-x">
         <Reveal y={24}>
           <div className="relative isolate grid gap-10 overflow-hidden rounded-[32px] bg-sand p-5 ring-1 ring-line sm:p-8 lg:grid-cols-12 lg:items-center lg:gap-12 lg:p-12 xl:p-14">
@@ -46,10 +47,7 @@ export function WorshipWithUs() {
               aria-hidden
               className="pointer-events-none absolute -top-32 -left-24 -z-10 size-[28rem] rounded-full bg-[radial-gradient(closest-side,rgba(240,150,130,0.28),transparent)]"
             />
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 -z-10 opacity-60 [mask-image:linear-gradient(90deg,#000,transparent_55%)] [background-image:linear-gradient(rgba(35,29,23,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(35,29,23,0.05)_1px,transparent_1px)] [background-size:48px_48px]"
-            />
+          <HeroBackdrop panel />
             <LogoMark className="pointer-events-none absolute -bottom-16 left-[30%] -z-10 h-72 opacity-[0.05]" />
             <div className="px-1 pt-2 sm:px-0 sm:pt-0 lg:col-span-5">
               <Reveal>

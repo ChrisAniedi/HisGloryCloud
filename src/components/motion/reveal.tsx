@@ -13,7 +13,7 @@ export function Reveal({
   children,
   className,
   delay = 0,
-  y = 24,
+  y = 14,
   onMount = false,
   as = "div",
 }: {
@@ -26,7 +26,7 @@ export function Reveal({
 }) {
   const reduce = useReducedMotion();
   const Comp = motion[as];
-  const hidden = reduce ? { opacity: 0 } : { opacity: 0, y, filter: "blur(10px)" };
+  const hidden = reduce ? { opacity: 0 } : { opacity: 0, y: Math.min(y, 18), filter: "blur(8px)" };
   const shown = { opacity: 1, y: 0, filter: "blur(0px)" };
   return (
     <Comp

@@ -38,6 +38,7 @@
 :root {
   /* Page gutter: the space between content and the screen edge (fluid, like Serviceberry's). */
   --gutter: clamp(1.25rem, 4vw, 4.5rem);
+  --section-gap: clamp(4rem, 7vw, 6rem);
   --radius: 0.5rem;
   --background: var(--color-paper);
   --foreground: var(--color-ink);
@@ -121,7 +122,7 @@
     padding-inline: var(--gutter);
   }
   .section-y {
-    padding-block: clamp(3.25rem, 6vw, 5.25rem);
+    padding-block: var(--section-gap);
   }
   /* Small label above a heading: plain sentence case, the accent colour */
   .kicker {

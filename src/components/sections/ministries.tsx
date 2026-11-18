@@ -38,7 +38,7 @@ const items = [
 /** The church's ministries, each with a hand-drawn picture that draws itself as you scroll. */
 export function Ministries() {
   return (
-    <section className="pt-[clamp(1rem,3vw,2rem)] pb-[clamp(3.25rem,6vw,5.25rem)]">
+    <section className="pt-[clamp(1rem,3vw,2rem)] pb-[var(--section-gap)]">
       <div className="container-x">
         <SectionIntro chip="Ministries" title="A place to grow, be cared for and serve" body="From the classroom to the community, there’s a way for every member of the family to be part of the work." />
         <div className="mt-12 grid gap-4 md:grid-cols-3">

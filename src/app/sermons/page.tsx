@@ -27,12 +27,12 @@ export default async function SermonsPage() {
   const items = await getLatestMessages(15);
   return (
     <>
-      <section className="relative isolate overflow-hidden pt-32 pb-[clamp(3.25rem,6vw,5.25rem)] md:pt-40">
+      <section className="relative isolate overflow-hidden pt-32 pb-[var(--section-gap)] md:pt-40">
         <HeroBackdrop />
         <div className="container-x">
           <Reveal className="text-center">
             <Chip>Sermons</Chip>
-            <h1 className="mx-auto mt-6 max-w-4xl text-[clamp(3rem,7vw,6.25rem)] leading-[0.95] font-display tracking-[-0.015em]">
+            <h1 className="mx-auto mt-6 max-w-6xl text-[clamp(2.6rem,5.4vw,4.75rem)] leading-[1] font-display tracking-[-0.015em]">
               Grow through <span className="text-red">the Word.</span>
             </h1>
             <p className="mx-auto mt-6 max-w-xl text-lg text-muted md:text-xl">Be strengthened, equipped and transformed through the preaching of God’s Word, by {church.leader.name}.</p>
@@ -43,7 +43,7 @@ export default async function SermonsPage() {
         </div>
       </section>
 
-      <section className="pb-[clamp(3.25rem,6vw,5.25rem)]">
+      <section className="pb-[var(--section-gap)]">
         <div className="container-x">
           <SectionIntro chip="Watch anywhere" title="Listen anywhere. Any time." body="Follow along through the week, wherever you are." />
           <div className="mt-12 grid gap-4 md:grid-cols-3">

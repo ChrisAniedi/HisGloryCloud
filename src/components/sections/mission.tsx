@@ -29,7 +29,7 @@ export function Mission() {
   const full = useTransform(scrollYProgress, () => 1);
   const words = TEXT.split(" ");
   return (
-    <section ref={ref} className="pb-[clamp(3.25rem,6vw,5.25rem)]">
+    <section ref={ref} className="pb-[var(--section-gap)]">
       <div className="container-x">
         <div data-nav="dark" className="relative grid gap-8 overflow-hidden rounded-[28px] bg-night p-7 text-white md:p-12 lg:grid-cols-12 lg:gap-12">
           <div aria-hidden className="pointer-events-none absolute -top-24 -left-24 size-80 rounded-full bg-[radial-gradient(closest-side,rgba(240,106,91,0.22),transparent)]" />
